@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михаил | Мои проекты</title>
+    <meta name="description" content="Коллекция полезных веб-инструментов и приложений от Михаила">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Михаил | Мои проекты">
+    <meta property="og:description" content="Коллекция полезных веб-инструментов и приложений">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --bg-dark: #0f172a;
+            --text: #1e293b;
+            --text-dark: #f1f5f9;
+            --muted: #64748b;
+            --card-bg: #ffffff;
+            --card-bg-dark: #1e293b;
+            --border: #e2e8f0;
+            --border-dark: #334155;
+
+            /* Project colors */
+            --inversion-primary: #10b981;
+            --inversion-light: #34d399;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: var(--bg-dark);
+                --text: var(--text-dark);
+                --card-bg: var(--card-bg-dark);
+                --border: var(--border-dark);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--muted);
+            font-size: 1.125rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card-inner {
+            padding: 2rem;
+        }
+
+        /* Project Icon (square) */
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        /* Inversion specific */
+        .project-card.inversion .project-icon {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+
+        .project-card.inversion:hover {
+            border-color: var(--inversion-primary);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background: var(--border);
+            color: var(--muted);
+        }
+
+        .project-card.inversion .tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--inversion-primary);
+        }
+
+        /* Coming Soon card */
+        .project-card.coming-soon {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .project-card.coming-soon .project-icon {
+            background: var(--border);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--text);
+        }
+
+        .footer svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Проекты Михаила</h1>
+            <p>Инструменты, которые помогают понять себя и упростить рутину</p>
+        </header>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Inversion Card -->
+            <a href="https://inversion.krechet.space" class="project-card inversion">
+                <div class="project-card-inner">
+                    <div class="project-icon">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Down arrow (white) -->
+                            <path d="M60 25 L60 55 M50 45 L60 55 L70 45" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                            <!-- Up arrow (white) -->
+                            <path d="M60 95 L60 65 M50 75 L60 65 L70 75" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Circular arrows -->
+                            <path d="M30 60 A30 30 0 0 1 60 30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+                            <path d="M90 60 A30 30 0 0 1 60 90" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+                            <!-- Arrow tips -->
+                            <polygon points="58,30 60,24 66,32" fill="white"/>
+                            <polygon points="62,90 60,96 54,88" fill="white" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <h2 class="project-title">Инверсия</h2>
+                    <p class="project-description">
+                        Что если твои провалы — это не слабость, а зашифрованная карта сильных сторон?
+                        Нейросеть найдёт паттерны там, где ты видел только ошибки.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">AI-анализ</span>
+                        <span class="tag">Самопознание</span>
+                        <span class="tag">Бесплатно</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Placeholder for future projects -->
+            <div class="project-card coming-soon">
+                <div class="project-card-inner">
+                    <div class="project-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h2 class="project-title">Скоро...</h2>
+                    <p class="project-description">
+                        Новый проект в разработке. Следите за обновлениями.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="https://t.me/krechet_mike" target="_blank" rel="noopener noreferrer">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                @krechet_mike
+            </a>
+        </footer>
+    </div>
+</body>
+</html>
