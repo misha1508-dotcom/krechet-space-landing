@@ -253,6 +253,20 @@
             color: #f5576c;
         }
 
+        /* Tochka Sborki specific */
+        .project-card.tochka .project-icon {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+        }
+
+        .project-card.tochka:hover {
+            border-color: #7c3aed;
+        }
+
+        .project-card.tochka .tag {
+            background: rgba(124, 58, 237, 0.1);
+            color: #7c3aed;
+        }
+
         .tag.premium {
             background: var(--premium-gradient);
             color: white;
@@ -329,6 +343,45 @@
 
         <!-- Public Projects -->
         <div class="projects-grid">
+            <!-- Tochka Sborki Card -->
+            <a href="https://tochka.krechet.space" class="project-card tochka">
+                <div class="project-card-inner">
+                    <div class="project-icon">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Central point -->
+                            <circle cx="60" cy="60" r="8" fill="white"/>
+                            <!-- Orbiting circles -->
+                            <circle cx="60" cy="60" r="25" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+                            <circle cx="60" cy="60" r="40" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+                            <!-- Connection points -->
+                            <circle cx="60" cy="35" r="4" fill="white" opacity="0.8"/>
+                            <circle cx="81" cy="48" r="4" fill="white" opacity="0.8"/>
+                            <circle cx="81" cy="72" r="4" fill="white" opacity="0.8"/>
+                            <circle cx="60" cy="85" r="4" fill="white" opacity="0.8"/>
+                            <circle cx="39" cy="72" r="4" fill="white" opacity="0.8"/>
+                            <circle cx="39" cy="48" r="4" fill="white" opacity="0.8"/>
+                            <!-- Lines to center -->
+                            <line x1="60" y1="60" x2="60" y2="35" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="60" x2="81" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="60" x2="81" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="60" x2="60" y2="85" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="60" x2="39" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="60" x2="39" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h2 class="project-title">Точка Сборки</h2>
+                    <p class="project-description">
+                        Рентген души. 10+ систем самопознания в одном месте: Human Design, Матрица Судьбы, СВП, Нумерология.
+                        AI находит скрытые противоречия между системами.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">AI-синтез</span>
+                        <span class="tag">Самопознание</span>
+                        <span class="tag">Beta</span>
+                    </div>
+                </div>
+            </a>
+
             <!-- Inversion Card -->
             <a href="https://inversion.krechet.space" class="project-card inversion">
                 <div class="project-card-inner">
@@ -420,11 +473,9 @@
     </div>
 
     <script>
-        // Valid promo codes
+        // Valid access key
         const PROMO_CODES = {
-            'PREMIUM2026': true,
-            'VIPACCESS': true,
-            'TESTCODE': true
+            'VIP': true
         };
 
         // Check if user already has access
