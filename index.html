@@ -32,6 +32,8 @@
             /* Project colors */
             --inversion-primary: #10b981;
             --inversion-light: #34d399;
+            --premium-gold: #f59e0b;
+            --premium-gradient: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -66,7 +68,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .header h1 {
@@ -80,11 +82,65 @@
             font-size: 1.125rem;
         }
 
+        /* Promo Code Section */
+        .promo-section {
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .promo-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .promo-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .promo-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--premium-gradient);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .promo-button:hover {
+            transform: scale(1.05);
+        }
+
+        .access-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--premium-gradient);
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
         /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         /* Project Card */
@@ -97,11 +153,25 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card.locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .project-card.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
         }
 
         .project-card-inner {
@@ -131,6 +201,16 @@
 
         .project-card.inversion:hover {
             border-color: var(--inversion-primary);
+        }
+
+        /* Wildberries specific */
+        .project-card.wildberries .project-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        /* Yogurt specific */
+        .project-card.yogurt .project-icon {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
         }
 
         .project-title {
@@ -163,14 +243,19 @@
             color: var(--inversion-primary);
         }
 
-        /* Coming Soon card */
-        .project-card.coming-soon {
-            opacity: 0.6;
-            pointer-events: none;
+        .project-card.wildberries .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
         }
 
-        .project-card.coming-soon .project-icon {
-            background: var(--border);
+        .project-card.yogurt .tag {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+        }
+
+        .tag.premium {
+            background: var(--premium-gradient);
+            color: white;
         }
 
         /* Footer */
@@ -209,6 +294,11 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Hide premium projects by default */
+        .premium-projects.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -219,21 +309,35 @@
             <p>Инструменты, которые помогают понять себя и упростить рутину</p>
         </header>
 
-        <!-- Projects Grid -->
+        <!-- Promo Code Section -->
+        <div class="promo-section">
+            <div class="promo-input-group">
+                <input
+                    type="text"
+                    class="promo-input"
+                    id="promoInput"
+                    placeholder="Есть промокод? Введи здесь"
+                />
+                <button class="promo-button" onclick="applyPromo()">Применить</button>
+            </div>
+            <div id="accessBadge" style="display: none;">
+                <span class="access-badge">
+                    ✨ Премиум доступ активирован
+                </span>
+            </div>
+        </div>
+
+        <!-- Public Projects -->
         <div class="projects-grid">
             <!-- Inversion Card -->
             <a href="https://inversion.krechet.space" class="project-card inversion">
                 <div class="project-card-inner">
                     <div class="project-icon">
                         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Down arrow (white) -->
                             <path d="M60 25 L60 55 M50 45 L60 55 L70 45" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                            <!-- Up arrow (white) -->
                             <path d="M60 95 L60 65 M50 75 L60 65 L70 75" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                            <!-- Circular arrows -->
                             <path d="M30 60 A30 30 0 0 1 60 30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
                             <path d="M90 60 A30 30 0 0 1 60 90" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
-                            <!-- Arrow tips -->
                             <polygon points="58,30 60,24 66,32" fill="white"/>
                             <polygon points="62,90 60,96 54,88" fill="white" opacity="0.7"/>
                         </svg>
@@ -250,24 +354,57 @@
                     </div>
                 </div>
             </a>
+        </div>
 
-            <!-- Placeholder for future projects -->
-            <div class="project-card coming-soon">
-                <div class="project-card-inner">
-                    <div class="project-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
+        <!-- Premium Projects (hidden by default) -->
+        <div class="premium-projects hidden" id="premiumProjects">
+            <h2 style="margin-bottom: 1.5rem; color: var(--muted);">🔓 Премиум инструменты</h2>
+            <div class="projects-grid">
+                <!-- Wildberries Acts Generator -->
+                <a href="https://wildberries-acts.krechet.space" class="project-card wildberries">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Акты Wildberries</h2>
+                        <p class="project-description">
+                            Генерация актов приёма и оказания услуг из XLSX. Автоматизируй документооборот.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">Премиум</span>
+                            <span class="tag">Автоматизация</span>
+                            <span class="tag">WB</span>
+                        </div>
                     </div>
-                    <h2 class="project-title">Скоро...</h2>
-                    <p class="project-description">
-                        Новый проект в разработке. Следите за обновлениями.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Coming Soon</span>
+                </a>
+
+                <!-- Yogurt Cost Calculator -->
+                <a href="https://yogurt-calc.krechet.space" class="project-card yogurt">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Калькулятор йогурта</h2>
+                        <p class="project-description">
+                            Юнит-экономика производства йогурта. Рассчитай себестоимость и маржу.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">Премиум</span>
+                            <span class="tag">Калькулятор</span>
+                            <span class="tag">Бизнес</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -281,5 +418,53 @@
             </a>
         </footer>
     </div>
+
+    <script>
+        // Valid promo codes
+        const PROMO_CODES = {
+            'PREMIUM2026': true,
+            'VIPACCESS': true,
+            'TESTCODE': true
+        };
+
+        // Check if user already has access
+        function checkAccess() {
+            const hasAccess = localStorage.getItem('premiumAccess') === 'true';
+            if (hasAccess) {
+                unlockPremium();
+            }
+        }
+
+        // Apply promo code
+        function applyPromo() {
+            const input = document.getElementById('promoInput');
+            const code = input.value.trim().toUpperCase();
+
+            if (PROMO_CODES[code]) {
+                localStorage.setItem('premiumAccess', 'true');
+                unlockPremium();
+                input.value = '';
+            } else {
+                alert('❌ Неверный промокод');
+            }
+        }
+
+        // Unlock premium projects
+        function unlockPremium() {
+            document.getElementById('premiumProjects').classList.remove('hidden');
+            document.getElementById('accessBadge').style.display = 'block';
+            document.getElementById('promoInput').disabled = true;
+        }
+
+        // Check access on page load
+        checkAccess();
+
+        // Allow Enter key to apply promo
+        document.getElementById('promoInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyPromo();
+            }
+        });
+    </script>
 </body>
 </html>
