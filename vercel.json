@@ -31,14 +31,6 @@
     {
       "source": "/yogurt-calc/:path*",
       "destination": "https://yogurt-cost-calculator.vercel.app/:path*"
-    },
-    {
-      "source": "/npa",
-      "destination": "https://npa-analyzer.vercel.app/"
-    },
-    {
-      "source": "/npa/:path*",
-      "destination": "https://npa-analyzer.vercel.app/:path*"
     }
   ]
 }
