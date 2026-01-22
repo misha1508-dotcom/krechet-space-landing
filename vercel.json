@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/nparggu",
-      "destination": "https://rggu-expertise.vercel.app/nparggu"
+      "destination": "https://npa-analyzer.vercel.app/"
     },
     {
       "source": "/nparggu/:path*",
-      "destination": "https://rggu-expertise.vercel.app/nparggu/:path*"
+      "destination": "https://npa-analyzer.vercel.app/:path*"
     },
     {
       "source": "/tochka",
@@ -18,11 +18,11 @@
     },
     {
       "source": "/inversion",
-      "destination": "https://strengths-finder.vercel.app/"
+      "destination": "https://strengths-finder-misha1508-dotcoms-projects.vercel.app/"
     },
     {
       "source": "/inversion/:path*",
-      "destination": "https://strengths-finder.vercel.app/:path*"
+      "destination": "https://strengths-finder-misha1508-dotcoms-projects.vercel.app/:path*"
     },
     {
       "source": "/wildberries-acts",
