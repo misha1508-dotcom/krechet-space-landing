@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/nparggu",
-      "destination": "https://npa-analyzer.vercel.app/"
+      "destination": "https://rggu-expertise.vercel.app/nparggu"
     },
     {
       "source": "/nparggu/:path*",
-      "destination": "https://npa-analyzer.vercel.app/:path*"
+      "destination": "https://rggu-expertise.vercel.app/nparggu/:path*"
     },
     {
       "source": "/tochka",
