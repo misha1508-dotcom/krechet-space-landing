@@ -1,0 +1,44 @@
+{
+  "rewrites": [
+    {
+      "source": "/tochka",
+      "destination": "https://assemblage-point.vercel.app/"
+    },
+    {
+      "source": "/tochka/:path*",
+      "destination": "https://assemblage-point.vercel.app/:path*"
+    },
+    {
+      "source": "/inversion",
+      "destination": "https://strengths-finder.vercel.app/"
+    },
+    {
+      "source": "/inversion/:path*",
+      "destination": "https://strengths-finder.vercel.app/:path*"
+    },
+    {
+      "source": "/wildberries-acts",
+      "destination": "https://wildberries-acts-generator.vercel.app/"
+    },
+    {
+      "source": "/wildberries-acts/:path*",
+      "destination": "https://wildberries-acts-generator.vercel.app/:path*"
+    },
+    {
+      "source": "/yogurt-calc",
+      "destination": "https://yogurt-cost-calculator.vercel.app/"
+    },
+    {
+      "source": "/yogurt-calc/:path*",
+      "destination": "https://yogurt-cost-calculator.vercel.app/:path*"
+    },
+    {
+      "source": "/npa",
+      "destination": "https://npa-analyzer.vercel.app/"
+    },
+    {
+      "source": "/npa/:path*",
+      "destination": "https://npa-analyzer.vercel.app/:path*"
+    }
+  ]
+}
