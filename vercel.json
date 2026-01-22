@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/nparggu",
+      "destination": "https://rggu-expertise.vercel.app/nparggu"
+    },
+    {
+      "source": "/nparggu/:path*",
+      "destination": "https://rggu-expertise.vercel.app/nparggu/:path*"
+    },
+    {
       "source": "/tochka",
       "destination": "https://assemblage-point.vercel.app/"
     },
