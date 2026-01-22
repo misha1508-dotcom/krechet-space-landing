@@ -135,6 +135,14 @@
             margin-top: 1rem;
         }
 
+        /* Section Title */
+        .section-title {
+            margin-bottom: 1.5rem;
+            color: var(--muted);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
         /* Projects Grid */
         .projects-grid {
             display: grid;
@@ -203,14 +211,65 @@
             border-color: var(--inversion-primary);
         }
 
+        .project-card.inversion .tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--inversion-primary);
+        }
+
+        /* Tochka Sborki specific */
+        .project-card.tochka .project-icon {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+        }
+
+        .project-card.tochka:hover {
+            border-color: #7c3aed;
+        }
+
+        .project-card.tochka .tag {
+            background: rgba(124, 58, 237, 0.1);
+            color: #7c3aed;
+        }
+
         /* Wildberries specific */
         .project-card.wildberries .project-icon {
             background: linear-gradient(135deg, #667eea, #764ba2);
         }
 
+        .project-card.wildberries:hover {
+            border-color: #667eea;
+        }
+
+        .project-card.wildberries .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
         /* Yogurt specific */
         .project-card.yogurt .project-icon {
             background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .project-card.yogurt:hover {
+            border-color: #f5576c;
+        }
+
+        .project-card.yogurt .tag {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+        }
+
+        /* NPA specific */
+        .project-card.npa .project-icon {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .project-card.npa:hover {
+            border-color: #3b82f6;
+        }
+
+        .project-card.npa .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
         }
 
         .project-title {
@@ -238,38 +297,14 @@
             color: var(--muted);
         }
 
-        .project-card.inversion .tag {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--inversion-primary);
-        }
-
-        .project-card.wildberries .tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        .project-card.yogurt .tag {
-            background: rgba(245, 87, 108, 0.1);
-            color: #f5576c;
-        }
-
-        /* Tochka Sborki specific */
-        .project-card.tochka .project-icon {
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-        }
-
-        .project-card.tochka:hover {
-            border-color: #7c3aed;
-        }
-
-        .project-card.tochka .tag {
-            background: rgba(124, 58, 237, 0.1);
-            color: #7c3aed;
-        }
-
         .tag.premium {
             background: var(--premium-gradient);
             color: white;
+        }
+
+        .tag.free {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
         }
 
         /* Footer */
@@ -309,9 +344,13 @@
             }
         }
 
-        /* Hide premium projects by default */
-        .premium-projects.hidden {
+        /* Hide VIP projects by default */
+        .vip-projects {
             display: none;
+        }
+
+        .vip-projects.unlocked {
+            display: block;
         }
     </style>
 </head>
@@ -330,58 +369,20 @@
                     type="text"
                     class="promo-input"
                     id="promoInput"
-                    placeholder="Есть ключ доступа? Введи здесь"
+                    placeholder="Есть VIP-ключ? Введи здесь"
                 />
                 <button class="promo-button" onclick="applyPromo()">Применить</button>
             </div>
             <div id="accessBadge" style="display: none;">
                 <span class="access-badge">
-                    ✨ Премиум доступ активирован
+                    ✨ VIP-доступ активирован
                 </span>
             </div>
         </div>
 
-        <!-- Public Projects -->
+        <!-- Free Projects (always visible) -->
+        <h2 class="section-title">Бесплатные инструменты</h2>
         <div class="projects-grid">
-            <!-- Tochka Sborki Card -->
-            <a href="/tochka" class="project-card tochka">
-                <div class="project-card-inner">
-                    <div class="project-icon">
-                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Central point -->
-                            <circle cx="60" cy="60" r="8" fill="white"/>
-                            <!-- Orbiting circles -->
-                            <circle cx="60" cy="60" r="25" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
-                            <circle cx="60" cy="60" r="40" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
-                            <!-- Connection points -->
-                            <circle cx="60" cy="35" r="4" fill="white" opacity="0.8"/>
-                            <circle cx="81" cy="48" r="4" fill="white" opacity="0.8"/>
-                            <circle cx="81" cy="72" r="4" fill="white" opacity="0.8"/>
-                            <circle cx="60" cy="85" r="4" fill="white" opacity="0.8"/>
-                            <circle cx="39" cy="72" r="4" fill="white" opacity="0.8"/>
-                            <circle cx="39" cy="48" r="4" fill="white" opacity="0.8"/>
-                            <!-- Lines to center -->
-                            <line x1="60" y1="60" x2="60" y2="35" stroke="white" stroke-width="1" opacity="0.5"/>
-                            <line x1="60" y1="60" x2="81" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
-                            <line x1="60" y1="60" x2="81" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
-                            <line x1="60" y1="60" x2="60" y2="85" stroke="white" stroke-width="1" opacity="0.5"/>
-                            <line x1="60" y1="60" x2="39" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
-                            <line x1="60" y1="60" x2="39" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
-                        </svg>
-                    </div>
-                    <h2 class="project-title">Точка Сборки</h2>
-                    <p class="project-description">
-                        Рентген души. 10+ систем самопознания в одном месте: Human Design, Матрица Судьбы, СВП, Нумерология.
-                        AI находит скрытые противоречия между системами.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">AI-синтез</span>
-                        <span class="tag">Самопознание</span>
-                        <span class="tag">Beta</span>
-                    </div>
-                </div>
-            </a>
-
             <!-- Inversion Card -->
             <a href="/inversion" class="project-card inversion">
                 <div class="project-card-inner">
@@ -401,18 +402,57 @@
                         Нейросеть найдёт паттерны там, где ты видел только ошибки.
                     </p>
                     <div class="project-tags">
+                        <span class="tag free">Бесплатно</span>
                         <span class="tag">AI-анализ</span>
                         <span class="tag">Самопознание</span>
-                        <span class="tag">Бесплатно</span>
                     </div>
                 </div>
             </a>
         </div>
 
-        <!-- Premium Projects (hidden by default) -->
-        <div class="premium-projects hidden" id="premiumProjects">
-            <h2 style="margin-bottom: 1.5rem; color: var(--muted);">🔓 Премиум инструменты</h2>
+        <!-- VIP Projects (hidden by default) -->
+        <div class="vip-projects" id="vipProjects">
+            <h2 class="section-title">VIP-инструменты</h2>
             <div class="projects-grid">
+                <!-- Tochka Sborki Card -->
+                <a href="/tochka" class="project-card tochka">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Central point -->
+                                <circle cx="60" cy="60" r="8" fill="white"/>
+                                <!-- Orbiting circles -->
+                                <circle cx="60" cy="60" r="25" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+                                <circle cx="60" cy="60" r="40" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+                                <!-- Connection points -->
+                                <circle cx="60" cy="35" r="4" fill="white" opacity="0.8"/>
+                                <circle cx="81" cy="48" r="4" fill="white" opacity="0.8"/>
+                                <circle cx="81" cy="72" r="4" fill="white" opacity="0.8"/>
+                                <circle cx="60" cy="85" r="4" fill="white" opacity="0.8"/>
+                                <circle cx="39" cy="72" r="4" fill="white" opacity="0.8"/>
+                                <circle cx="39" cy="48" r="4" fill="white" opacity="0.8"/>
+                                <!-- Lines to center -->
+                                <line x1="60" y1="60" x2="60" y2="35" stroke="white" stroke-width="1" opacity="0.5"/>
+                                <line x1="60" y1="60" x2="81" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
+                                <line x1="60" y1="60" x2="81" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
+                                <line x1="60" y1="60" x2="60" y2="85" stroke="white" stroke-width="1" opacity="0.5"/>
+                                <line x1="60" y1="60" x2="39" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
+                                <line x1="60" y1="60" x2="39" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Точка Сборки</h2>
+                        <p class="project-description">
+                            Рентген души. 10+ систем самопознания в одном месте: Human Design, Матрица Судьбы, СВП, Нумерология.
+                            AI находит скрытые противоречия между системами.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">AI-синтез</span>
+                            <span class="tag">Самопознание</span>
+                        </div>
+                    </div>
+                </a>
+
                 <!-- Wildberries Acts Generator -->
                 <a href="/wildberries-acts" class="project-card wildberries">
                     <div class="project-card-inner">
@@ -430,7 +470,7 @@
                             Генерация актов приёма и оказания услуг из XLSX. Автоматизируй документооборот.
                         </p>
                         <div class="project-tags">
-                            <span class="tag premium">Премиум</span>
+                            <span class="tag premium">VIP</span>
                             <span class="tag">Автоматизация</span>
                             <span class="tag">WB</span>
                         </div>
@@ -452,12 +492,123 @@
                             Юнит-экономика производства йогурта. Рассчитай себестоимость и маржу.
                         </p>
                         <div class="project-tags">
-                            <span class="tag premium">Премиум</span>
+                            <span class="tag premium">VIP</span>
                             <span class="tag">Калькулятор</span>
                             <span class="tag">Бизнес</span>
                         </div>
                     </div>
                 </a>
+
+                <!-- NPA Analyzer -->
+                <a href="/npa" class="project-card npa">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <line x1="8" y1="7" x2="16" y2="7"/>
+                                <line x1="8" y1="11" x2="16" y2="11"/>
+                                <line x1="8" y1="15" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Анализатор НПА</h2>
+                        <p class="project-description">
+                            AI-анализ нормативно-правовых актов. Быстро разберись в законодательстве.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">AI-анализ</span>
+                            <span class="tag">Право</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Locked VIP Preview (shown when not unlocked) -->
+        <div class="vip-preview" id="vipPreview">
+            <h2 class="section-title">VIP-инструменты (нужен ключ)</h2>
+            <div class="projects-grid">
+                <!-- Locked Tochka Sborki -->
+                <div class="project-card tochka locked">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="8" fill="white"/>
+                                <circle cx="60" cy="60" r="25" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+                                <circle cx="60" cy="60" r="40" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Точка Сборки</h2>
+                        <p class="project-description">
+                            Рентген души. 10+ систем самопознания в одном месте.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">AI-синтез</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Locked Wildberries -->
+                <div class="project-card wildberries locked">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Акты Wildberries</h2>
+                        <p class="project-description">
+                            Генерация актов приёма и оказания услуг из XLSX.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">Автоматизация</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Locked Yogurt -->
+                <div class="project-card yogurt locked">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Калькулятор йогурта</h2>
+                        <p class="project-description">
+                            Юнит-экономика производства йогурта.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">Калькулятор</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Locked NPA -->
+                <div class="project-card npa locked">
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Анализатор НПА</h2>
+                        <p class="project-description">
+                            AI-анализ нормативно-правовых актов.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">AI-анализ</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -473,38 +624,39 @@
     </div>
 
     <script>
-        // Valid access key
-        const PROMO_CODES = {
-            'VIP': true
-        };
+        // Valid VIP key
+        const VIP_KEY = 'VIP';
 
-        // Check if user already has access
+        // Check if user already has VIP access
         function checkAccess() {
-            const hasAccess = localStorage.getItem('premiumAccess') === 'true';
+            const hasAccess = localStorage.getItem('vipAccess') === 'true';
             if (hasAccess) {
-                unlockPremium();
+                unlockVIP();
             }
         }
 
-        // Apply promo code
+        // Apply VIP key
         function applyPromo() {
             const input = document.getElementById('promoInput');
             const code = input.value.trim().toUpperCase();
 
-            if (PROMO_CODES[code]) {
-                localStorage.setItem('premiumAccess', 'true');
-                unlockPremium();
+            if (code === VIP_KEY) {
+                localStorage.setItem('vipAccess', 'true');
+                unlockVIP();
                 input.value = '';
             } else {
-                alert('❌ Неверный ключ доступа');
+                alert('Неверный VIP-ключ');
             }
         }
 
-        // Unlock premium projects
-        function unlockPremium() {
-            document.getElementById('premiumProjects').classList.remove('hidden');
+        // Unlock VIP projects
+        function unlockVIP() {
+            document.getElementById('vipProjects').classList.add('unlocked');
+            document.getElementById('vipPreview').style.display = 'none';
             document.getElementById('accessBadge').style.display = 'block';
             document.getElementById('promoInput').disabled = true;
+            document.querySelector('.promo-button').disabled = true;
+            document.querySelector('.promo-button').style.opacity = '0.5';
         }
 
         // Check access on page load
