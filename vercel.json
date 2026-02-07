@@ -1,7 +1,12 @@
 {
+  "trailingSlash": true,
   "rewrites": [
     {
-      "source": "/nparggu",
+      "source": "/_next/:path*",
+      "destination": "https://strengths-finder-misha1508-dotcoms-projects.vercel.app/_next/:path*"
+    },
+    {
+      "source": "/nparggu/",
       "destination": "https://rggu-expertise.vercel.app/nparggu"
     },
     {
@@ -9,15 +14,15 @@
       "destination": "https://rggu-expertise.vercel.app/nparggu/:path*"
     },
     {
-      "source": "/tochka",
-      "destination": "https://assemblage-point.vercel.app/"
+      "source": "/tochka/",
+      "destination": "https://tochka.krechet.space/"
     },
     {
       "source": "/tochka/:path*",
-      "destination": "https://assemblage-point.vercel.app/:path*"
+      "destination": "https://tochka.krechet.space/:path*"
     },
     {
-      "source": "/inversion",
+      "source": "/inversion/",
       "destination": "https://strengths-finder-misha1508-dotcoms-projects.vercel.app/"
     },
     {
@@ -25,7 +30,7 @@
       "destination": "https://strengths-finder-misha1508-dotcoms-projects.vercel.app/:path*"
     },
     {
-      "source": "/wildberries-acts",
+      "source": "/wildberries-acts/",
       "destination": "https://wildberries-acts-generator.vercel.app/"
     },
     {
@@ -33,12 +38,36 @@
       "destination": "https://wildberries-acts-generator.vercel.app/:path*"
     },
     {
-      "source": "/yogurt-calc",
-      "destination": "https://yogurt-cost-calculator.vercel.app/"
+      "source": "/yogurt-calc/",
+      "destination": "https://yogurt-calc.krechet.space/"
     },
     {
       "source": "/yogurt-calc/:path*",
-      "destination": "https://yogurt-cost-calculator.vercel.app/:path*"
+      "destination": "https://yogurt-calc.krechet.space/:path*"
+    },
+    {
+      "source": "/date-planner/",
+      "destination": "https://date-planner-one.vercel.app/"
+    },
+    {
+      "source": "/date-planner/:path*",
+      "destination": "https://date-planner-one.vercel.app/:path*"
+    },
+    {
+      "source": "/promotest/",
+      "destination": "https://product-visualizer-sand.vercel.app/"
+    },
+    {
+      "source": "/promotest/:path*",
+      "destination": "https://product-visualizer-sand.vercel.app/:path*"
+    },
+    {
+      "source": "/kp-calculator/",
+      "destination": "https://krechet.space/kp-calculator/"
+    },
+    {
+      "source": "/kp-calculator/:path*",
+      "destination": "https://krechet.space/kp-calculator/:path*"
     }
   ]
 }

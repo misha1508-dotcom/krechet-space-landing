@@ -275,6 +275,98 @@
             color: #3b82f6;
         }
 
+        /* Date Planner specific */
+        .project-card.date-planner .project-icon {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+        }
+
+        .project-card.date-planner:hover {
+            border-color: #ec4899;
+        }
+
+        .project-card.date-planner .tag {
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+        }
+
+        /* Product Visualizer specific */
+        .project-card.promotest .project-icon {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+        }
+
+        .project-card.promotest:hover {
+            border-color: #8b5cf6;
+        }
+
+        .project-card.promotest .tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        /* KP Calculator specific */
+        .project-card.kp-calculator .project-icon {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+        }
+
+        .project-card.kp-calculator:hover {
+            border-color: #f97316;
+        }
+
+        .project-card.kp-calculator .tag {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+
+        /* Favorite button */
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        .favorite-btn.active {
+            background: #fef3c7;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .favorite-btn {
+                background: rgba(30, 41, 59, 0.9);
+            }
+            .favorite-btn:hover {
+                background: var(--card-bg-dark);
+            }
+            .favorite-btn.active {
+                background: #78350f;
+            }
+        }
+
+        /* Favorites section */
+        .favorites-section {
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .favorites-section.has-favorites {
+            display: block;
+        }
+
         .project-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -355,6 +447,166 @@
         .vip-projects.unlocked {
             display: block;
         }
+
+        /* Secret PDF Modal */
+        .secret-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .secret-overlay.active {
+            display: flex;
+        }
+        .secret-modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 520px;
+            width: 92%;
+            position: relative;
+            animation: secretSlideIn 0.3s ease;
+        }
+        @keyframes secretSlideIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .secret-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--muted);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .secret-close:hover { color: var(--text); }
+        .secret-modal h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .secret-modal > p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 1rem;
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-area:hover {
+            border-color: var(--muted);
+            background: rgba(100,116,139,0.05);
+        }
+        .upload-area.has-file {
+            border-color: #10b981;
+            background: rgba(16,185,129,0.05);
+        }
+        .upload-icon {
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .upload-text {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .upload-hint {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .secret-process-btn {
+            width: 100%;
+            padding: 0.85rem;
+            margin-top: 1.2rem;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .secret-process-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124,58,237,0.4);
+        }
+        .secret-process-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .secret-status {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            padding: 1rem;
+            background: rgba(124,58,237,0.08);
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+            color: #7c3aed;
+        }
+        .secret-spinner {
+            width: 20px; height: 20px;
+            border: 3px solid rgba(124,58,237,0.2);
+            border-top-color: #7c3aed;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .secret-result {
+            margin-top: 1.2rem;
+        }
+        .secret-download-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .secret-download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.4);
+        }
+        .secret-error {
+            margin-top: 1rem;
+            padding: 0.8rem 1rem;
+            background: rgba(239,68,68,0.1);
+            color: #dc2626;
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+        }
+        .secret-raw {
+            margin-top: 0.8rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.8rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -383,11 +635,18 @@
             </div>
         </div>
 
+        <!-- Favorites Section -->
+        <div class="favorites-section" id="favoritesSection">
+            <h2 class="section-title">Избранное</h2>
+            <div class="projects-grid" id="favoritesGrid"></div>
+        </div>
+
         <!-- Free Projects (always visible) -->
         <h2 class="section-title">Бесплатные инструменты</h2>
-        <div class="projects-grid">
+        <div class="projects-grid" id="freeProjects">
             <!-- Inversion Card -->
-            <a href="/inversion" class="project-card inversion">
+            <a href="/inversion" class="project-card inversion" data-project="inversion">
+                <button class="favorite-btn" onclick="toggleFavorite(event, 'inversion')">☆</button>
                 <div class="project-card-inner">
                     <div class="project-icon">
                         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -418,7 +677,8 @@
             <h2 class="section-title">VIP-инструменты</h2>
             <div class="projects-grid">
                 <!-- Tochka Sborki Card -->
-                <a href="/tochka" class="project-card tochka">
+                <a href="/tochka" class="project-card tochka" data-project="tochka">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'tochka')">☆</button>
                     <div class="project-card-inner">
                         <div class="project-icon">
                             <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +717,8 @@
                 </a>
 
                 <!-- Wildberries Acts Generator -->
-                <a href="/wildberries-acts" class="project-card wildberries">
+                <a href="/wildberries-acts" class="project-card wildberries" data-project="wildberries">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'wildberries')">☆</button>
                     <div class="project-card-inner">
                         <div class="project-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
@@ -481,7 +742,8 @@
                 </a>
 
                 <!-- Yogurt Cost Calculator -->
-                <a href="/yogurt-calc" class="project-card yogurt">
+                <a href="/yogurt-calc" class="project-card yogurt" data-project="yogurt">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'yogurt')">☆</button>
                     <div class="project-card-inner">
                         <div class="project-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
@@ -503,7 +765,8 @@
                 </a>
 
                 <!-- NPA RGGU Analyzer -->
-                <a href="/nparggu" class="project-card nparggu">
+                <a href="/nparggu" class="project-card nparggu" data-project="nparggu">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'nparggu')">☆</button>
                     <div class="project-card-inner">
                         <div class="project-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
@@ -524,6 +787,84 @@
                     </div>
                 </a>
 
+                <!-- Date Planner -->
+                <a href="/date-planner" class="project-card date-planner" data-project="date-planner">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'date-planner')">☆</button>
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Планировщик свиданий</h2>
+                        <p class="project-description">
+                            Генератор идей для свиданий. Выбери категорию, бюджет и получи план идеального вечера.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">Планирование</span>
+                            <span class="tag">Отношения</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- KP Calculator -->
+                <a href="/kp-calculator" class="project-card kp-calculator" data-project="kp-calculator">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'kp-calculator')">☆</button>
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                                <line x1="8" y1="6" x2="16" y2="6"/>
+                                <rect x="7" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="10.5" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="14" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="7" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="10.5" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="14" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="7" y="16" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
+                                <rect x="10.5" y="16" width="6.5" height="2" rx="0.5" fill="white" stroke="none"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">КП Калькулятор</h2>
+                        <p class="project-description">
+                            Расчёт коммерческих предложений для госзакупок. Загрузи файлы — получи оптимальные цены и готовые документы.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">Калькулятор</span>
+                            <span class="tag">Госзакупки</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product Visualizer -->
+                <a href="/promotest" class="project-card promotest" data-project="promotest">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 'promotest')">☆</button>
+                    <div class="project-card-inner">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="M21 15l-5-5L5 21"/>
+                            </svg>
+                        </div>
+                        <h2 class="project-title">Визуализатор продукта</h2>
+                        <p class="project-description">
+                            AI-генерация изображений продукта с этикеткой на любом фоне. Загрузи тару, этикетку и фон — получи готовое фото.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag premium">VIP</span>
+                            <span class="tag">AI</span>
+                            <span class="tag">Дизайн</span>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
 
@@ -538,9 +879,117 @@
         </footer>
     </div>
 
+    <!-- Secret PDF Modal -->
+    <div class="secret-overlay" id="secretOverlay">
+        <div class="secret-modal">
+            <button class="secret-close" onclick="closeSecretModal()">&times;</button>
+            <h2>PDF &rarr; Word</h2>
+            <p>Загрузите PDF с таблицами &mdash; Claude Opus создаст идентичный Word файл</p>
+
+            <div id="secretUpload">
+                <input type="file" id="pdfInput" accept=".pdf" style="display:none">
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('pdfInput').click()">
+                    <span class="upload-icon">📄</span>
+                    <span class="upload-text" id="uploadText">Выберите PDF файл</span>
+                    <span class="upload-hint" id="fileName">Нажмите или перетащите</span>
+                </div>
+            </div>
+
+            <button class="secret-process-btn" id="processBtn" onclick="processPdf()" disabled>
+                Обработать
+            </button>
+
+            <div class="secret-status" id="secretStatus" style="display:none">
+                <div class="secret-spinner"></div>
+                <span id="statusText">Отправляю в Claude Opus...</span>
+            </div>
+
+            <div class="secret-result" id="secretResult" style="display:none">
+                <button class="secret-download-btn" id="downloadBtn">
+                    Скачать Word файл
+                </button>
+            </div>
+
+            <div class="secret-error" id="secretError" style="display:none"></div>
+        </div>
+    </div>
+
+    <!-- docx library for Word generation -->
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.1.1/build/index.umd.min.js"></script>
+
     <script>
         // Valid VIP key
         const VIP_KEY = 'VIP';
+
+        // Get favorites from localStorage
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('favorites') || '[]');
+        }
+
+        // Save favorites to localStorage
+        function saveFavorites(favorites) {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+
+        // Toggle favorite
+        function toggleFavorite(event, projectId) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const favorites = getFavorites();
+            const index = favorites.indexOf(projectId);
+
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(projectId);
+            }
+
+            saveFavorites(favorites);
+            renderFavorites();
+            updateFavoriteButtons();
+        }
+
+        // Update favorite button states
+        function updateFavoriteButtons() {
+            const favorites = getFavorites();
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                const card = btn.closest('.project-card');
+                const projectId = card.dataset.project;
+                const isFavorite = favorites.includes(projectId);
+                btn.textContent = isFavorite ? '★' : '☆';
+                btn.classList.toggle('active', isFavorite);
+            });
+        }
+
+        // Render favorites section
+        function renderFavorites() {
+            const favorites = getFavorites();
+            const favoritesSection = document.getElementById('favoritesSection');
+            const favoritesGrid = document.getElementById('favoritesGrid');
+
+            if (favorites.length === 0) {
+                favoritesSection.classList.remove('has-favorites');
+                favoritesGrid.innerHTML = '';
+                return;
+            }
+
+            favoritesSection.classList.add('has-favorites');
+            favoritesGrid.innerHTML = '';
+
+            favorites.forEach(projectId => {
+                const originalCard = document.querySelector(`[data-project="${projectId}"]`);
+                if (originalCard) {
+                    const clone = originalCard.cloneNode(true);
+                    // Update the favorite button in clone
+                    const cloneBtn = clone.querySelector('.favorite-btn');
+                    if (cloneBtn) {
+                        cloneBtn.onclick = (e) => toggleFavorite(e, projectId);
+                    }
+                    favoritesGrid.appendChild(clone);
+                }
+            });
+        }
 
         // Check if user already has VIP access
         function checkAccess() {
@@ -571,16 +1020,279 @@
             document.getElementById('promoInput').disabled = true;
             document.querySelector('.promo-button').disabled = true;
             document.querySelector('.promo-button').style.opacity = '0.5';
+            // Re-render favorites after VIP unlock to include VIP projects
+            setTimeout(renderFavorites, 100);
         }
 
-        // Check access on page load
+        // Initialize on page load
         checkAccess();
+        updateFavoriteButtons();
+        renderFavorites();
 
         // Allow Enter key to apply promo
         document.getElementById('promoInput')?.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 applyPromo();
             }
+        });
+
+        // =============================================
+        // Secret PDF → Word Feature
+        // Click header 5 times to open
+        // =============================================
+        let _sc = 0, _st = null;
+        document.querySelector('.header h1').addEventListener('click', function() {
+            _sc++;
+            clearTimeout(_st);
+            _st = setTimeout(() => { _sc = 0; }, 2500);
+            if (_sc >= 5) {
+                _sc = 0;
+                openSecretModal();
+            }
+        });
+
+        let _pdfBase64 = null;
+        let _pdfFileName = null;
+        let _docxBlob = null;
+
+        function openSecretModal() {
+            document.getElementById('secretOverlay').classList.add('active');
+            resetSecretState();
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secretOverlay').classList.remove('active');
+        }
+
+        // Close on overlay click
+        document.getElementById('secretOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeSecretModal();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSecretModal();
+        });
+
+        function resetSecretState() {
+            _pdfBase64 = null;
+            _pdfFileName = null;
+            _docxBlob = null;
+            document.getElementById('pdfInput').value = '';
+            document.getElementById('uploadText').textContent = 'Выберите PDF файл';
+            document.getElementById('fileName').textContent = 'Нажмите или перетащите';
+            document.getElementById('uploadArea').classList.remove('has-file');
+            document.getElementById('processBtn').disabled = true;
+            document.getElementById('secretStatus').style.display = 'none';
+            document.getElementById('secretResult').style.display = 'none';
+            document.getElementById('secretError').style.display = 'none';
+        }
+
+        // File input handler
+        document.getElementById('pdfInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            handlePdfFile(file);
+        });
+
+        // Drag & drop
+        const uploadArea = document.getElementById('uploadArea');
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#7c3aed';
+        });
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '';
+        });
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                handlePdfFile(file);
+            }
+        });
+
+        function handlePdfFile(file) {
+            _pdfFileName = file.name;
+            document.getElementById('uploadText').textContent = file.name;
+            const sizeMB = (file.size / 1024 / 1024).toFixed(1);
+            document.getElementById('fileName').textContent = sizeMB + ' МБ';
+            document.getElementById('uploadArea').classList.add('has-file');
+            document.getElementById('processBtn').disabled = false;
+            document.getElementById('secretResult').style.display = 'none';
+            document.getElementById('secretError').style.display = 'none';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Extract base64 from data URL
+                _pdfBase64 = e.target.result.split(',')[1];
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function processPdf() {
+            if (!_pdfBase64) return;
+
+            const processBtn = document.getElementById('processBtn');
+            const status = document.getElementById('secretStatus');
+            const statusText = document.getElementById('statusText');
+            const result = document.getElementById('secretResult');
+            const errorDiv = document.getElementById('secretError');
+
+            processBtn.disabled = true;
+            status.style.display = 'flex';
+            result.style.display = 'none';
+            errorDiv.style.display = 'none';
+            statusText.textContent = 'Claude Opus анализирует PDF...';
+
+            try {
+                const resp = await fetch('/api/pdf-to-word', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pdf: _pdfBase64,
+                        filename: _pdfFileName
+                    })
+                });
+
+                const data = await resp.json();
+
+                if (data.error && !data.tables) {
+                    throw new Error(data.error + (data.raw ? '\n\nОтвет AI:\n' + data.raw : ''));
+                }
+
+                if (!data.tables || data.tables.length === 0) {
+                    throw new Error('Таблицы не найдены в документе');
+                }
+
+                statusText.textContent = 'Создаю Word документ...';
+
+                // Generate .docx
+                _docxBlob = await generateDocx(data.tables);
+
+                status.style.display = 'none';
+                result.style.display = 'block';
+
+            } catch (err) {
+                status.style.display = 'none';
+                errorDiv.style.display = 'block';
+                const msg = err.message || 'Неизвестная ошибка';
+                if (msg.includes('Ответ AI:')) {
+                    const parts = msg.split('\n\nОтвет AI:\n');
+                    errorDiv.innerHTML = parts[0] + '<div class="secret-raw">' + escapeHtml(parts[1] || '') + '</div>';
+                } else {
+                    errorDiv.textContent = msg;
+                }
+                processBtn.disabled = false;
+            }
+        }
+
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+
+        async function generateDocx(tables) {
+            const { Document, Table, TableRow, TableCell, Paragraph, TextRun, Packer, WidthType, AlignmentType, BorderStyle } = docx;
+
+            const children = [];
+
+            tables.forEach((table, tIdx) => {
+                // Table name
+                if (table.name) {
+                    children.push(new Paragraph({
+                        children: [new TextRun({ text: table.name, bold: true, size: 24 })],
+                        spacing: { after: 150, before: tIdx > 0 ? 400 : 0 }
+                    }));
+                } else if (tIdx > 0) {
+                    children.push(new Paragraph({ text: '', spacing: { after: 300 } }));
+                }
+
+                const allRows = [];
+                const colCount = Math.max(
+                    (table.headers || []).length,
+                    ...table.rows.map(r => r.length)
+                );
+
+                const cellBorders = {
+                    top: { style: BorderStyle.SINGLE, size: 1 },
+                    bottom: { style: BorderStyle.SINGLE, size: 1 },
+                    left: { style: BorderStyle.SINGLE, size: 1 },
+                    right: { style: BorderStyle.SINGLE, size: 1 },
+                };
+
+                // Header row
+                if (table.headers && table.headers.length > 0) {
+                    const headerCells = [];
+                    for (let i = 0; i < colCount; i++) {
+                        headerCells.push(new TableCell({
+                            children: [new Paragraph({
+                                children: [new TextRun({
+                                    text: String(table.headers[i] || ''),
+                                    bold: true,
+                                    size: 20,
+                                    font: 'Calibri'
+                                })],
+                                alignment: AlignmentType.CENTER
+                            })],
+                            borders: cellBorders,
+                            shading: { fill: 'D9E2F3' }
+                        }));
+                    }
+                    allRows.push(new TableRow({ children: headerCells }));
+                }
+
+                // Data rows
+                table.rows.forEach(row => {
+                    const cells = [];
+                    for (let i = 0; i < colCount; i++) {
+                        cells.push(new TableCell({
+                            children: [new Paragraph({
+                                children: [new TextRun({
+                                    text: String(row[i] ?? ''),
+                                    size: 20,
+                                    font: 'Calibri'
+                                })]
+                            })],
+                            borders: cellBorders
+                        }));
+                    }
+                    allRows.push(new TableRow({ children: cells }));
+                });
+
+                if (allRows.length > 0) {
+                    children.push(new Table({
+                        rows: allRows,
+                        width: { size: 100, type: WidthType.PERCENTAGE }
+                    }));
+                }
+            });
+
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: children
+                }]
+            });
+
+            return await Packer.toBlob(doc);
+        }
+
+        // Download button
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (!_docxBlob) return;
+            const name = (_pdfFileName || 'document').replace(/\.pdf$/i, '') + '.docx';
+            const url = URL.createObjectURL(_docxBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         });
     </script>
 </body>
