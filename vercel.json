@@ -63,11 +63,11 @@
     },
     {
       "source": "/kp-calculator/",
-      "destination": "https://krechet.space/kp-calculator/"
+      "destination": "https://misha1508-dotcom-kp-calculator-app-vl0qcw.streamlit.app/"
     },
     {
       "source": "/kp-calculator/:path*",
-      "destination": "https://krechet.space/kp-calculator/:path*"
+      "destination": "https://misha1508-dotcom-kp-calculator-app-vl0qcw.streamlit.app/:path*"
     }
   ]
 }
