@@ -123,6 +123,7 @@
         /* Per-card lock */
         .project-card.vip-locked {
             cursor: default;
+            opacity: 0.7;
         }
         .project-card.vip-locked:hover {
             transform: none;
@@ -488,25 +489,27 @@ function renderCards() {
         const isFree = freeSet.has(p.id);
         const isLocked = !isFree && !isVIP;
 
-        const card = document.createElement('a');
-        card.href = isLocked ? 'javascript:void(0)' : p.url;
+        const card = document.createElement('div');
         card.className = 'project-card' + (isLocked ? ' vip-locked' : '');
         card.dataset.id = p.id;
 
-        if (isLocked) {
-            card.addEventListener('click', e => e.preventDefault());
-        }
+        // Navigate on card click (skip if clicking toggle or drag handle)
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.access-toggle') || e.target.closest('.drag-handle')) return;
+            if (isLocked) return;
+            window.location.href = p.url;
+        });
 
         // Build inner HTML
         let html = '';
 
         // Access toggle (VIP admin only)
         if (isVIP) {
-            html += `<button class="access-toggle ${isFree ? 'is-free' : ''}"
-                onclick="event.preventDefault();event.stopPropagation();toggleAccess('${p.id}')"
+            html += `<div class="access-toggle ${isFree ? 'is-free' : ''}"
+                data-pid="${p.id}"
                 title="${isFree ? 'Сделать VIP (закрыть доступ)' : 'Сделать бесплатным (открыть доступ)'}">
                 ${isFree ? '\u{1F513}' : '\u{1F512}'}
-            </button>`;
+            </div>`;
         }
 
         // Drag handle (VIP only)
@@ -537,6 +540,14 @@ function renderCards() {
 
         card.innerHTML = html;
         grid.appendChild(card);
+    });
+
+    // Event delegation for access toggles
+    grid.querySelectorAll('.access-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleAccess(btn.dataset.pid);
+        });
     });
 
     if (isVIP) initDragAndDrop();
