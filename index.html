@@ -51,19 +51,9 @@
         }
 
         /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .header h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-        .header p {
-            color: var(--muted);
-            font-size: 1.05rem;
-        }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .header p { color: var(--muted); font-size: 1.05rem; }
 
         /* Promo */
         .promo-section {
@@ -74,10 +64,7 @@
             border-radius: 1rem;
             padding: 1.25rem;
         }
-        .promo-input-group {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .promo-input-group { display: flex; gap: 0.5rem; }
         .promo-input {
             flex: 1;
             padding: 0.7rem 1rem;
@@ -92,67 +79,18 @@
         .promo-button {
             padding: 0.7rem 1.25rem;
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.15s;
-            font-size: 0.95rem;
+            color: white; border: none; border-radius: 0.5rem;
+            font-weight: 600; cursor: pointer;
+            transition: transform 0.15s; font-size: 0.95rem;
         }
         .promo-button:hover { transform: scale(1.04); }
         .promo-button:disabled { opacity: 0.5; cursor: default; transform: none; }
         .access-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
+            display: inline-flex; align-items: center; gap: 0.4rem;
             padding: 0.4rem 0.9rem;
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 0.75rem;
-        }
-
-        /* Projects wrapper */
-        .projects-wrapper {
-            position: relative;
-            min-height: 200px;
-        }
-
-        /* Lock overlay */
-        .lock-overlay {
-            display: none;
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1.5rem;
-        }
-        .lock-overlay-inner {
-            text-align: center;
-            padding: 2rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-        }
-        .lock-overlay-inner .lock-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .lock-overlay-inner p {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .projects-wrapper.locked .lock-overlay { display: flex; }
-        .projects-wrapper.locked .projects-grid {
-            filter: blur(8px);
-            pointer-events: none;
-            user-select: none;
+            color: white; border-radius: 9999px;
+            font-size: 0.8rem; font-weight: 600; margin-top: 0.75rem;
         }
 
         /* Grid */
@@ -160,7 +98,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.25rem;
-            transition: filter 0.3s;
         }
 
         /* Card */
@@ -183,85 +120,127 @@
             box-shadow: 0 12px 32px -8px rgba(0,0,0,0.15);
         }
 
+        /* Per-card lock */
+        .project-card.vip-locked {
+            cursor: default;
+        }
+        .project-card.vip-locked:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .project-card.vip-locked .card-inner {
+            filter: blur(6px);
+            user-select: none;
+        }
+        .card-lock {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            border-radius: 1.5rem;
+        }
+        .card-lock span {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+        }
+        .project-card.vip-locked .card-lock {
+            display: flex;
+        }
+
         .card-inner {
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             height: 100%;
+            transition: filter 0.3s;
         }
 
         /* Icon */
         .card-icon {
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             border-radius: 0.875rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.75rem; flex-shrink: 0;
         }
 
-        /* Drag handle */
+        /* Access toggle (top-left, VIP only) */
+        .access-toggle {
+            position: absolute;
+            top: 0.75rem; left: 0.75rem;
+            width: 34px; height: 34px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 5;
+            transition: transform 0.15s, background 0.15s, border-color 0.15s;
+        }
+        .access-toggle:hover { transform: scale(1.12); }
+        .access-toggle.is-free {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+        @media (prefers-color-scheme: dark) {
+            .access-toggle.is-free {
+                background: #064e3b;
+                border-color: #10b981;
+            }
+        }
+
+        /* Drag handle (top-right, VIP only) */
         .drag-handle {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            width: 32px;
-            height: 32px;
+            top: 0.75rem; right: 0.75rem;
+            width: 32px; height: 32px;
             border-radius: 8px;
             background: var(--bg);
             border: 1px solid var(--border);
-            display: none;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             cursor: grab;
-            font-size: 1rem;
-            color: var(--muted);
+            font-size: 1rem; color: var(--muted);
             touch-action: none;
             z-index: 5;
             transition: background 0.15s;
         }
         .drag-handle:hover { background: var(--border); }
         .drag-handle:active { cursor: grabbing; }
-        .unlocked .drag-handle { display: flex; }
 
         .card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 1rem;
-            line-height: 1.3;
+            font-size: 1.2rem; font-weight: 700;
+            margin-top: 1rem; line-height: 1.3;
         }
         .card-desc {
-            color: var(--muted);
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            flex: 1;
-            overflow: hidden;
+            color: var(--muted); font-size: 0.85rem;
+            margin-top: 0.5rem; flex: 1; overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
         .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: auto;
-            padding-top: 0.75rem;
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+            margin-top: auto; padding-top: 0.75rem;
         }
         .tag {
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-weight: 500;
+            font-size: 0.7rem; padding: 0.2rem 0.6rem;
+            border-radius: 9999px; font-weight: 500;
+        }
+        .tag-free {
+            background: rgba(16, 185, 129, 0.15);
+            color: #059669;
+        }
+        .tag-vip {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
         }
 
         /* Drag states */
         .drag-clone {
-            position: fixed;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.9;
+            position: fixed; z-index: 9999;
+            pointer-events: none; opacity: 0.9;
             transform: rotate(2deg) scale(1.03);
             box-shadow: 0 20px 50px -10px rgba(0,0,0,0.3);
             border-radius: 1.5rem;
@@ -276,21 +255,25 @@
 
         /* Footer */
         .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
+            text-align: center; margin-top: 3rem;
+            padding-top: 1.5rem; border-top: 1px solid var(--border);
         }
         .footer a {
-            color: var(--muted);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--muted); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
             transition: color 0.2s;
         }
         .footer a:hover { color: var(--text); }
         .footer svg { width: 20px; height: 20px; }
+
+        /* Empty state for non-VIP with no free projects */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--muted);
+        }
+        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+        .empty-state p { font-size: 1rem; }
 
         @media (max-width: 580px) {
             .header h1 { font-size: 1.75rem; }
@@ -301,6 +284,7 @@
             .card-desc { font-size: 0.75rem; -webkit-line-clamp: 2; }
             .tag { font-size: 0.6rem; padding: 0.15rem 0.45rem; }
             .drag-handle { width: 26px; height: 26px; font-size: 0.8rem; top: 0.5rem; right: 0.5rem; }
+            .access-toggle { width: 28px; height: 28px; font-size: 0.85rem; top: 0.5rem; left: 0.5rem; border-radius: 8px; }
         }
     </style>
 </head>
@@ -311,25 +295,17 @@
             <p>Инструменты, которые помогают понять себя и упростить рутину</p>
         </header>
 
-        <div class="promo-section">
+        <div class="promo-section" id="promoSection">
             <div class="promo-input-group">
                 <input type="text" class="promo-input" id="promoInput" placeholder="Введите ключ доступа">
                 <button class="promo-button" id="promoBtn" onclick="applyPromo()">Открыть</button>
             </div>
             <div id="accessBadge" style="display:none">
-                <span class="access-badge">&#10024; Доступ активирован</span>
+                <span class="access-badge">&#10024; VIP-доступ активирован</span>
             </div>
         </div>
 
-        <div class="projects-wrapper locked" id="projectsWrapper">
-            <div class="lock-overlay">
-                <div class="lock-overlay-inner">
-                    <div class="lock-icon">&#128274;</div>
-                    <p>Введите VIP-ключ, чтобы открыть проекты</p>
-                </div>
-            </div>
-            <div class="projects-grid" id="projectsGrid"></div>
-        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
 
         <footer class="footer">
             <a href="https://t.me/krechet_mike" target="_blank" rel="noopener noreferrer">
@@ -456,9 +432,31 @@ const PROJECTS = [
 const VIP_KEY = 'VIP';
 const STORAGE_ORDER = 'projectOrder';
 const STORAGE_VIP = 'vipAccess';
+const STORAGE_FREE = 'freeProjects';
 
 const grid = document.getElementById('projectsGrid');
-const wrapper = document.getElementById('projectsWrapper');
+let isVIP = false;
+
+// ── Free projects management ─────────────────────────────
+function getFreeSet() {
+    try { return new Set(JSON.parse(localStorage.getItem(STORAGE_FREE) || '[]')); }
+    catch { return new Set(); }
+}
+
+function saveFreeSet(s) {
+    localStorage.setItem(STORAGE_FREE, JSON.stringify([...s]));
+}
+
+function toggleAccess(projectId) {
+    const free = getFreeSet();
+    if (free.has(projectId)) {
+        free.delete(projectId);
+    } else {
+        free.add(projectId);
+    }
+    saveFreeSet(free);
+    renderCards();
+}
 
 // ── Order ────────────────────────────────────────────────
 function getSavedOrder() {
@@ -476,7 +474,6 @@ function getOrderedProjects() {
     if (!saved.length) return [...PROJECTS];
     const map = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
     const ordered = saved.filter(id => map[id]).map(id => map[id]);
-    // Append any new projects not in saved order
     PROJECTS.forEach(p => { if (!saved.includes(p.id)) ordered.push(p); });
     return ordered;
 }
@@ -485,24 +482,64 @@ function getOrderedProjects() {
 function renderCards() {
     grid.innerHTML = '';
     const projects = getOrderedProjects();
+    const freeSet = getFreeSet();
+
     projects.forEach(p => {
+        const isFree = freeSet.has(p.id);
+        const isLocked = !isFree && !isVIP;
+
         const card = document.createElement('a');
-        card.href = p.url;
-        card.className = 'project-card';
+        card.href = isLocked ? 'javascript:void(0)' : p.url;
+        card.className = 'project-card' + (isLocked ? ' vip-locked' : '');
         card.dataset.id = p.id;
-        card.innerHTML = `
-            <div class="drag-handle" title="Перетащите для изменения порядка">&#x2630;</div>
+
+        if (isLocked) {
+            card.addEventListener('click', e => e.preventDefault());
+        }
+
+        // Build inner HTML
+        let html = '';
+
+        // Access toggle (VIP admin only)
+        if (isVIP) {
+            html += `<button class="access-toggle ${isFree ? 'is-free' : ''}"
+                onclick="event.preventDefault();event.stopPropagation();toggleAccess('${p.id}')"
+                title="${isFree ? 'Сделать VIP (закрыть доступ)' : 'Сделать бесплатным (открыть доступ)'}">
+                ${isFree ? '\u{1F513}' : '\u{1F512}'}
+            </button>`;
+        }
+
+        // Drag handle (VIP only)
+        if (isVIP) {
+            html += '<div class="drag-handle" title="Перетащите">&#x2630;</div>';
+        }
+
+        // Lock overlay for non-VIP on VIP cards
+        if (isLocked) {
+            html += '<div class="card-lock"><span>\u{1F512}</span></div>';
+        }
+
+        // Access status tag
+        const accessTag = isFree
+            ? '<span class="tag tag-free">Бесплатно</span>'
+            : '<span class="tag tag-vip">VIP</span>';
+
+        html += `
             <div class="card-inner">
                 <div class="card-icon" style="background:${p.gradient}">${p.emoji}</div>
                 <div class="card-title">${p.title}</div>
                 <div class="card-desc">${p.desc}</div>
                 <div class="card-tags">
+                    ${accessTag}
                     ${p.tags.map(t => `<span class="tag" style="background:${p.tagColor}18;color:${p.tagColor}">${t}</span>`).join('')}
                 </div>
             </div>`;
+
+        card.innerHTML = html;
         grid.appendChild(card);
     });
-    initDragAndDrop();
+
+    if (isVIP) initDragAndDrop();
 }
 
 // ── VIP ──────────────────────────────────────────────────
@@ -510,7 +547,7 @@ function applyPromo() {
     const input = document.getElementById('promoInput');
     if (input.value.trim().toUpperCase() === VIP_KEY) {
         localStorage.setItem(STORAGE_VIP, 'true');
-        unlockVIP();
+        activateVIP();
         input.value = '';
     } else {
         input.style.borderColor = '#ef4444';
@@ -518,23 +555,27 @@ function applyPromo() {
     }
 }
 
-function unlockVIP() {
-    wrapper.classList.remove('locked');
-    wrapper.classList.add('unlocked');
+function activateVIP() {
+    isVIP = true;
     document.getElementById('accessBadge').style.display = 'block';
     document.getElementById('promoInput').disabled = true;
     document.getElementById('promoBtn').disabled = true;
+    renderCards();
 }
 
 function checkAccess() {
-    if (localStorage.getItem(STORAGE_VIP) === 'true') unlockVIP();
+    if (localStorage.getItem(STORAGE_VIP) === 'true') {
+        activateVIP();
+    } else {
+        renderCards();
+    }
 }
 
 document.getElementById('promoInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') applyPromo();
 });
 
-// ── Drag & Drop (pointer events — works on desktop + mobile) ──
+// ── Drag & Drop (pointer events) ────────────────────────
 let drag = null;
 
 function initDragAndDrop() {
@@ -553,17 +594,12 @@ function onDragStart(e) {
 
     const rect = card.getBoundingClientRect();
     drag = {
-        card,
-        pointerId: e.pointerId,
+        card, pointerId: e.pointerId,
         offsetX: e.clientX - rect.left,
         offsetY: e.clientY - rect.top,
-        width: rect.width,
-        height: rect.height,
-        startX: e.clientX,
-        startY: e.clientY,
-        moved: false,
-        clone: null,
-        placeholder: null
+        width: rect.width, height: rect.height,
+        startX: e.clientX, startY: e.clientY,
+        moved: false, clone: null, placeholder: null
     };
 
     handle.addEventListener('pointermove', onDragMove);
@@ -582,31 +618,26 @@ function onDragMove(e) {
         drag.moved = true;
         drag.card.style.pointerEvents = 'none';
 
-        // Clone
         drag.clone = drag.card.cloneNode(true);
         drag.clone.className = 'project-card drag-clone';
         drag.clone.style.width = drag.width + 'px';
         drag.clone.style.height = drag.height + 'px';
         document.body.appendChild(drag.clone);
 
-        // Placeholder
         drag.placeholder = document.createElement('div');
         drag.placeholder.className = 'drag-placeholder';
         grid.insertBefore(drag.placeholder, drag.card);
-
         drag.card.style.display = 'none';
     }
 
     drag.clone.style.left = (e.clientX - drag.offsetX) + 'px';
     drag.clone.style.top = (e.clientY - drag.offsetY) + 'px';
 
-    // Find drop target
     const cards = [...grid.querySelectorAll('.project-card:not([style*="display: none"])')];
     for (const c of cards) {
         const r = c.getBoundingClientRect();
         if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) {
-            const afterMid = e.clientY > r.top + r.height / 2;
-            if (afterMid) {
+            if (e.clientY > r.top + r.height / 2) {
                 grid.insertBefore(drag.placeholder, c.nextSibling);
             } else {
                 grid.insertBefore(drag.placeholder, c);
@@ -636,7 +667,6 @@ function onDragEnd(e) {
 
 // ── Init ─────────────────────────────────────────────────
 checkAccess();
-renderCards();
 </script>
 </body>
 </html>
