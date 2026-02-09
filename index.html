@@ -5,17 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Михаил | Мои проекты</title>
     <meta name="description" content="Коллекция полезных веб-инструментов и приложений от Михаила">
-
-    <!-- Open Graph -->
     <meta property="og:title" content="Михаил | Мои проекты">
     <meta property="og:description" content="Коллекция полезных веб-инструментов и приложений">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
-
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,49 +17,37 @@
     <style>
         :root {
             --bg: #f8fafc;
-            --bg-dark: #0f172a;
             --text: #1e293b;
-            --text-dark: #f1f5f9;
             --muted: #64748b;
             --card-bg: #ffffff;
-            --card-bg-dark: #1e293b;
             --border: #e2e8f0;
-            --border-dark: #334155;
-
-            /* Project colors */
-            --inversion-primary: #10b981;
-            --inversion-light: #34d399;
-            --premium-gold: #f59e0b;
-            --premium-gradient: linear-gradient(135deg, #f59e0b, #d97706);
+            --accent: #f59e0b;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: var(--bg-dark);
-                --text: var(--text-dark);
-                --card-bg: var(--card-bg-dark);
-                --border: var(--border-dark);
+                --bg: #0f172a;
+                --text: #f1f5f9;
+                --muted: #94a3b8;
+                --card-bg: #1e293b;
+                --border: #334155;
             }
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
 
         /* Header */
@@ -73,343 +55,232 @@
             text-align: center;
             margin-bottom: 2rem;
         }
-
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
-
         .header p {
             color: var(--muted);
-            font-size: 1.125rem;
+            font-size: 1.05rem;
         }
 
-        /* Promo Code Section */
+        /* Promo */
         .promo-section {
-            max-width: 500px;
-            margin: 0 auto 3rem;
+            max-width: 420px;
+            margin: 0 auto 2.5rem;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 1rem;
-            padding: 1.5rem;
+            padding: 1.25rem;
         }
-
         .promo-input-group {
             display: flex;
             gap: 0.5rem;
         }
-
         .promo-input {
             flex: 1;
-            padding: 0.75rem 1rem;
+            padding: 0.7rem 1rem;
             border: 1px solid var(--border);
             border-radius: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
             background: var(--bg);
             color: var(--text);
+            outline: none;
         }
-
+        .promo-input:focus { border-color: var(--accent); }
         .promo-button {
-            padding: 0.75rem 1.5rem;
-            background: var(--premium-gradient);
+            padding: 0.7rem 1.25rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
             border: none;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.15s;
+            font-size: 0.95rem;
         }
-
-        .promo-button:hover {
-            transform: scale(1.05);
-        }
-
+        .promo-button:hover { transform: scale(1.04); }
+        .promo-button:disabled { opacity: 0.5; cursor: default; transform: none; }
         .access-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--premium-gradient);
+            gap: 0.4rem;
+            padding: 0.4rem 0.9rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
             border-radius: 9999px;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
         }
 
-        /* Section Title */
-        .section-title {
-            margin-bottom: 1.5rem;
+        /* Projects wrapper */
+        .projects-wrapper {
+            position: relative;
+            min-height: 200px;
+        }
+
+        /* Lock overlay */
+        .lock-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1.5rem;
+        }
+        .lock-overlay-inner {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+        .lock-overlay-inner .lock-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .lock-overlay-inner p {
             color: var(--muted);
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 0.95rem;
         }
 
-        /* Projects Grid */
+        .projects-wrapper.locked .lock-overlay { display: flex; }
+        .projects-wrapper.locked .projects-grid {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+            transition: filter 0.3s;
         }
 
-        /* Project Card */
+        /* Card */
         .project-card {
+            aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 1.5rem;
             overflow: hidden;
-            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
-            display: block;
+            display: flex;
+            flex-direction: column;
             position: relative;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-card.locked {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .project-card.locked::after {
-            content: '🔒';
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .project-card-inner {
-            padding: 2rem;
-        }
-
-        /* Project Icon (square) */
-        .project-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-icon svg {
-            width: 48px;
-            height: 48px;
-        }
-
-        /* Inversion specific */
-        .project-card.inversion .project-icon {
-            background: linear-gradient(135deg, #10b981, #34d399);
-        }
-
-        .project-card.inversion:hover {
-            border-color: var(--inversion-primary);
-        }
-
-        .project-card.inversion .tag {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--inversion-primary);
-        }
-
-        /* Tochka Sborki specific */
-        .project-card.tochka .project-icon {
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-        }
-
-        .project-card.tochka:hover {
-            border-color: #7c3aed;
-        }
-
-        .project-card.tochka .tag {
-            background: rgba(124, 58, 237, 0.1);
-            color: #7c3aed;
-        }
-
-        /* Wildberries specific */
-        .project-card.wildberries .project-icon {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .project-card.wildberries:hover {
-            border-color: #667eea;
-        }
-
-        .project-card.wildberries .tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        /* Yogurt specific */
-        .project-card.yogurt .project-icon {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-        }
-
-        .project-card.yogurt:hover {
-            border-color: #f5576c;
-        }
-
-        .project-card.yogurt .tag {
-            background: rgba(245, 87, 108, 0.1);
-            color: #f5576c;
-        }
-
-        /* NPA RGGU specific */
-        .project-card.nparggu .project-icon {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-        }
-
-        .project-card.nparggu:hover {
-            border-color: #3b82f6;
-        }
-
-        .project-card.nparggu .tag {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        /* Date Planner specific */
-        .project-card.date-planner .project-icon {
-            background: linear-gradient(135deg, #ec4899, #f43f5e);
-        }
-
-        .project-card.date-planner:hover {
-            border-color: #ec4899;
-        }
-
-        .project-card.date-planner .tag {
-            background: rgba(236, 72, 153, 0.1);
-            color: #ec4899;
-        }
-
-        /* Product Visualizer specific */
-        .project-card.promotest .project-icon {
-            background: linear-gradient(135deg, #8b5cf6, #a855f7);
-        }
-
-        .project-card.promotest:hover {
-            border-color: #8b5cf6;
-        }
-
-        .project-card.promotest .tag {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-
-        /* KP Calculator specific */
-        .project-card.kp-calculator .project-icon {
-            background: linear-gradient(135deg, #f97316, #ea580c);
-        }
-
-        .project-card.kp-calculator:hover {
-            border-color: #f97316;
-        }
-
-        .project-card.kp-calculator .tag {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        /* Favorite button */
-        .favorite-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 36px;
-            height: 36px;
-            border: none;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px -8px rgba(0,0,0,0.15);
+        }
+
+        .card-inner {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Icon */
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 0.875rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            transition: all 0.2s;
-            z-index: 10;
+            font-size: 1.75rem;
+            flex-shrink: 0;
         }
 
-        .favorite-btn:hover {
-            transform: scale(1.1);
-            background: white;
-        }
-
-        .favorite-btn.active {
-            background: #fef3c7;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .favorite-btn {
-                background: rgba(30, 41, 59, 0.9);
-            }
-            .favorite-btn:hover {
-                background: var(--card-bg-dark);
-            }
-            .favorite-btn.active {
-                background: #78350f;
-            }
-        }
-
-        /* Favorites section */
-        .favorites-section {
+        /* Drag handle */
+        .drag-handle {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
             display: none;
-            margin-bottom: 2rem;
-        }
-
-        .favorites-section.has-favorites {
-            display: block;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-description {
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            font-size: 1rem;
             color: var(--muted);
-            margin-bottom: 1rem;
+            touch-action: none;
+            z-index: 5;
+            transition: background 0.15s;
         }
+        .drag-handle:hover { background: var(--border); }
+        .drag-handle:active { cursor: grabbing; }
+        .unlocked .drag-handle { display: flex; }
 
-        .project-tags {
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            line-height: 1.3;
+        }
+        .card-desc {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .card-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            margin-top: auto;
+            padding-top: 0.75rem;
         }
-
         .tag {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 9999px;
-            background: var(--border);
-            color: var(--muted);
+            font-weight: 500;
         }
 
-        .tag.premium {
-            background: var(--premium-gradient);
-            color: white;
+        /* Drag states */
+        .drag-clone {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.9;
+            transform: rotate(2deg) scale(1.03);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.3);
+            border-radius: 1.5rem;
         }
-
-        .tag.free {
-            background: rgba(16, 185, 129, 0.2);
-            color: #059669;
+        .drag-placeholder {
+            aspect-ratio: 1;
+            border: 2px dashed var(--border);
+            border-radius: 1.5rem;
+            background: transparent;
+            min-height: 100px;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border);
         }
-
         .footer a {
             color: var(--muted);
             text-decoration: none;
@@ -418,882 +289,354 @@
             gap: 0.5rem;
             transition: color 0.2s;
         }
+        .footer a:hover { color: var(--text); }
+        .footer svg { width: 20px; height: 20px; }
 
-        .footer a:hover {
-            color: var(--text);
-        }
-
-        .footer svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Hide VIP projects by default */
-        .vip-projects {
-            display: none;
-        }
-
-        .vip-projects.unlocked {
-            display: block;
-        }
-
-        /* Secret PDF Modal */
-        .secret-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-        }
-        .secret-overlay.active {
-            display: flex;
-        }
-        .secret-modal {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            max-width: 520px;
-            width: 92%;
-            position: relative;
-            animation: secretSlideIn 0.3s ease;
-        }
-        @keyframes secretSlideIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .secret-close {
-            position: absolute;
-            top: 1rem;
-            right: 1.2rem;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--muted);
-            cursor: pointer;
-            line-height: 1;
-        }
-        .secret-close:hover { color: var(--text); }
-        .secret-modal h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-        .secret-modal > p {
-            color: var(--muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-        .upload-area {
-            border: 2px dashed var(--border);
-            border-radius: 1rem;
-            padding: 2rem 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .upload-area:hover {
-            border-color: var(--muted);
-            background: rgba(100,116,139,0.05);
-        }
-        .upload-area.has-file {
-            border-color: #10b981;
-            background: rgba(16,185,129,0.05);
-        }
-        .upload-icon {
-            display: block;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .upload-text {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-        .upload-hint {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-        .secret-process-btn {
-            width: 100%;
-            padding: 0.85rem;
-            margin-top: 1.2rem;
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            color: white;
-            border: none;
-            border-radius: 0.75rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .secret-process-btn:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(124,58,237,0.4);
-        }
-        .secret-process-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .secret-status {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
-            padding: 1rem;
-            background: rgba(124,58,237,0.08);
-            border-radius: 0.75rem;
-            font-size: 0.9rem;
-            color: #7c3aed;
-        }
-        .secret-spinner {
-            width: 20px; height: 20px;
-            border: 3px solid rgba(124,58,237,0.2);
-            border-top-color: #7c3aed;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .secret-result {
-            margin-top: 1.2rem;
-        }
-        .secret-download-btn {
-            width: 100%;
-            padding: 0.85rem;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            border-radius: 0.75rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .secret-download-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16,185,129,0.4);
-        }
-        .secret-error {
-            margin-top: 1rem;
-            padding: 0.8rem 1rem;
-            background: rgba(239,68,68,0.1);
-            color: #dc2626;
-            border-radius: 0.75rem;
-            font-size: 0.85rem;
-        }
-        .secret-raw {
-            margin-top: 0.8rem;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 0.8rem;
-            background: rgba(0,0,0,0.05);
-            border-radius: 0.5rem;
-            font-size: 0.75rem;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-break: break-all;
+        @media (max-width: 580px) {
+            .header h1 { font-size: 1.75rem; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .card-inner { padding: 1rem; }
+            .card-icon { width: 44px; height: 44px; font-size: 1.35rem; border-radius: 0.7rem; }
+            .card-title { font-size: 0.95rem; margin-top: 0.6rem; }
+            .card-desc { font-size: 0.75rem; -webkit-line-clamp: 2; }
+            .tag { font-size: 0.6rem; padding: 0.15rem 0.45rem; }
+            .drag-handle { width: 26px; height: 26px; font-size: 0.8rem; top: 0.5rem; right: 0.5rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <h1>Проекты Михаила</h1>
             <p>Инструменты, которые помогают понять себя и упростить рутину</p>
         </header>
 
-        <!-- Promo Code Section -->
         <div class="promo-section">
             <div class="promo-input-group">
-                <input
-                    type="text"
-                    class="promo-input"
-                    id="promoInput"
-                    placeholder="Есть ключ доступа?"
-                />
-                <button class="promo-button" onclick="applyPromo()">Применить</button>
+                <input type="text" class="promo-input" id="promoInput" placeholder="Введите ключ доступа">
+                <button class="promo-button" id="promoBtn" onclick="applyPromo()">Открыть</button>
             </div>
-            <div id="accessBadge" style="display: none;">
-                <span class="access-badge">
-                    ✨ VIP-доступ активирован
-                </span>
+            <div id="accessBadge" style="display:none">
+                <span class="access-badge">&#10024; Доступ активирован</span>
             </div>
         </div>
 
-        <!-- Favorites Section -->
-        <div class="favorites-section" id="favoritesSection">
-            <h2 class="section-title">Избранное</h2>
-            <div class="projects-grid" id="favoritesGrid"></div>
-        </div>
-
-        <!-- Free Projects (always visible) -->
-        <h2 class="section-title">Бесплатные инструменты</h2>
-        <div class="projects-grid" id="freeProjects">
-            <!-- Inversion Card -->
-            <a href="/inversion" class="project-card inversion" data-project="inversion">
-                <button class="favorite-btn" onclick="toggleFavorite(event, 'inversion')">☆</button>
-                <div class="project-card-inner">
-                    <div class="project-icon">
-                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M60 25 L60 55 M50 45 L60 55 L70 45" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                            <path d="M60 95 L60 65 M50 75 L60 65 L70 75" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M30 60 A30 30 0 0 1 60 30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
-                            <path d="M90 60 A30 30 0 0 1 60 90" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
-                            <polygon points="58,30 60,24 66,32" fill="white"/>
-                            <polygon points="62,90 60,96 54,88" fill="white" opacity="0.7"/>
-                        </svg>
-                    </div>
-                    <h2 class="project-title">Инверсия</h2>
-                    <p class="project-description">
-                        Что если твои провалы — это не слабость, а зашифрованная карта сильных сторон?
-                        Нейросеть найдёт паттерны там, где ты видел только ошибки.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag free">Бесплатно</span>
-                        <span class="tag">AI-анализ</span>
-                        <span class="tag">Самопознание</span>
-                    </div>
+        <div class="projects-wrapper locked" id="projectsWrapper">
+            <div class="lock-overlay">
+                <div class="lock-overlay-inner">
+                    <div class="lock-icon">&#128274;</div>
+                    <p>Введите VIP-ключ, чтобы открыть проекты</p>
                 </div>
-            </a>
-        </div>
-
-        <!-- VIP Projects (hidden by default) -->
-        <div class="vip-projects" id="vipProjects">
-            <h2 class="section-title">VIP-инструменты</h2>
-            <div class="projects-grid">
-                <!-- Tochka Sborki Card -->
-                <a href="/tochka" class="project-card tochka" data-project="tochka">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'tochka')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Central point -->
-                                <circle cx="60" cy="60" r="8" fill="white"/>
-                                <!-- Orbiting circles -->
-                                <circle cx="60" cy="60" r="25" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
-                                <circle cx="60" cy="60" r="40" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
-                                <!-- Connection points -->
-                                <circle cx="60" cy="35" r="4" fill="white" opacity="0.8"/>
-                                <circle cx="81" cy="48" r="4" fill="white" opacity="0.8"/>
-                                <circle cx="81" cy="72" r="4" fill="white" opacity="0.8"/>
-                                <circle cx="60" cy="85" r="4" fill="white" opacity="0.8"/>
-                                <circle cx="39" cy="72" r="4" fill="white" opacity="0.8"/>
-                                <circle cx="39" cy="48" r="4" fill="white" opacity="0.8"/>
-                                <!-- Lines to center -->
-                                <line x1="60" y1="60" x2="60" y2="35" stroke="white" stroke-width="1" opacity="0.5"/>
-                                <line x1="60" y1="60" x2="81" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
-                                <line x1="60" y1="60" x2="81" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
-                                <line x1="60" y1="60" x2="60" y2="85" stroke="white" stroke-width="1" opacity="0.5"/>
-                                <line x1="60" y1="60" x2="39" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
-                                <line x1="60" y1="60" x2="39" y2="48" stroke="white" stroke-width="1" opacity="0.5"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">Точка Сборки</h2>
-                        <p class="project-description">
-                            Рентген души. 10+ систем самопознания в одном месте: Human Design, Матрица Судьбы, СВП, Нумерология.
-                            AI находит скрытые противоречия между системами.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">AI-синтез</span>
-                            <span class="tag">Самопознание</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Wildberries Acts Generator -->
-                <a href="/wildberries-acts" class="project-card wildberries" data-project="wildberries">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'wildberries')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                                <polyline points="10 9 9 9 8 9"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">Акты Wildberries</h2>
-                        <p class="project-description">
-                            Генерация актов приёма и оказания услуг из XLSX. Автоматизируй документооборот.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">Автоматизация</span>
-                            <span class="tag">WB</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Yogurt Cost Calculator -->
-                <a href="/yogurt-calc" class="project-card yogurt" data-project="yogurt">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'yogurt')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <path d="M3 9h18"/>
-                                <path d="M9 21V9"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">Калькулятор йогурта</h2>
-                        <p class="project-description">
-                            Юнит-экономика производства йогурта. Рассчитай себестоимость и маржу.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">Калькулятор</span>
-                            <span class="tag">Бизнес</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- NPA RGGU Analyzer -->
-                <a href="/nparggu" class="project-card nparggu" data-project="nparggu">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'nparggu')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">НПА РГГУ</h2>
-                        <p class="project-description">
-                            Анализ нормативно-правовых актов для студентов РГГУ. Экспертиза документов с AI.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">Анализ</span>
-                            <span class="tag">Право</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Date Planner -->
-                <a href="/date-planner" class="project-card date-planner" data-project="date-planner">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'date-planner')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/>
-                                <line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
-                                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">Планировщик свиданий</h2>
-                        <p class="project-description">
-                            Генератор идей для свиданий. Выбери категорию, бюджет и получи план идеального вечера.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">Планирование</span>
-                            <span class="tag">Отношения</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- KP Calculator -->
-                <a href="/kp-calculator" class="project-card kp-calculator" data-project="kp-calculator">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'kp-calculator')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <rect x="4" y="2" width="16" height="20" rx="2"/>
-                                <line x1="8" y1="6" x2="16" y2="6"/>
-                                <rect x="7" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="10.5" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="14" y="10" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="7" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="10.5" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="14" y="13" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="7" y="16" width="3" height="2" rx="0.5" fill="white" stroke="none"/>
-                                <rect x="10.5" y="16" width="6.5" height="2" rx="0.5" fill="white" stroke="none"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">КП Калькулятор</h2>
-                        <p class="project-description">
-                            Расчёт коммерческих предложений для госзакупок. Загрузи файлы — получи оптимальные цены и готовые документы.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">Калькулятор</span>
-                            <span class="tag">Госзакупки</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product Visualizer -->
-                <a href="/promotest" class="project-card promotest" data-project="promotest">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, 'promotest')">☆</button>
-                    <div class="project-card-inner">
-                        <div class="project-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <path d="M21 15l-5-5L5 21"/>
-                            </svg>
-                        </div>
-                        <h2 class="project-title">Визуализатор продукта</h2>
-                        <p class="project-description">
-                            AI-генерация изображений продукта с этикеткой на любом фоне. Загрузи тару, этикетку и фон — получи готовое фото.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag premium">VIP</span>
-                            <span class="tag">AI</span>
-                            <span class="tag">Дизайн</span>
-                        </div>
-                    </div>
-                </a>
-
             </div>
+            <div class="projects-grid" id="projectsGrid"></div>
         </div>
 
-        <!-- Footer -->
         <footer class="footer">
             <a href="https://t.me/krechet_mike" target="_blank" rel="noopener noreferrer">
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                </svg>
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                 @krechet_mike
             </a>
         </footer>
     </div>
 
-    <!-- Secret PDF Modal -->
-    <div class="secret-overlay" id="secretOverlay">
-        <div class="secret-modal">
-            <button class="secret-close" onclick="closeSecretModal()">&times;</button>
-            <h2>PDF &rarr; Word</h2>
-            <p>Загрузите PDF с таблицами &mdash; Claude Opus создаст идентичный Word файл</p>
+<script>
+const PROJECTS = [
+    {
+        id: 'inversion',
+        title: 'Инверсия',
+        desc: 'Нейросеть превращает твои провалы в карту сильных сторон',
+        url: '/inversion/',
+        emoji: '\u{1F504}',
+        gradient: 'linear-gradient(135deg, #10b981, #34d399)',
+        tagColor: '#10b981',
+        tags: ['AI-анализ', 'Самопознание']
+    },
+    {
+        id: 'tochka',
+        title: 'Точка Сборки',
+        desc: '10+ систем самопознания в одном месте. AI находит скрытые противоречия',
+        url: '/assemblage/',
+        emoji: '\u{1F3AF}',
+        gradient: 'linear-gradient(135deg, #7c3aed, #ec4899)',
+        tagColor: '#7c3aed',
+        tags: ['AI-синтез', 'Самопознание']
+    },
+    {
+        id: 'kp-calculator',
+        title: 'КП Калькулятор',
+        desc: 'Расчёт коммерческих предложений для госзакупок из загруженных файлов',
+        url: '/kp-calculator/',
+        emoji: '\u{1F9EE}',
+        gradient: 'linear-gradient(135deg, #f97316, #ea580c)',
+        tagColor: '#f97316',
+        tags: ['Калькулятор', 'Госзакупки']
+    },
+    {
+        id: 'virtual-barber',
+        title: 'Virtual Barber',
+        desc: 'AI-превью новой причёски. Загрузи фото \u2014 увидь себя с другой стрижкой',
+        url: '/virtual-barber/',
+        emoji: '\u{1F488}',
+        gradient: 'linear-gradient(135deg, #14b8a6, #0d9488)',
+        tagColor: '#14b8a6',
+        tags: ['AI', 'Стиль']
+    },
+    {
+        id: 'wildberries',
+        title: 'Акты Wildberries',
+        desc: 'Генерация актов приёма и оказания услуг из XLSX файлов',
+        url: '/wildberries-acts/',
+        emoji: '\u{1F4C4}',
+        gradient: 'linear-gradient(135deg, #667eea, #764ba2)',
+        tagColor: '#667eea',
+        tags: ['Автоматизация', 'WB']
+    },
+    {
+        id: 'yogurt-calc',
+        title: 'Калькулятор йогурта',
+        desc: 'Юнит-экономика и себестоимость производства йогурта',
+        url: '/yogurt-calc/',
+        emoji: '\u{1F95B}',
+        gradient: 'linear-gradient(135deg, #f093fb, #f5576c)',
+        tagColor: '#f5576c',
+        tags: ['Калькулятор', 'Бизнес']
+    },
+    {
+        id: 'yogurt-financial',
+        title: 'Финансовая модель',
+        desc: 'P&L, точка безубыточности и финансовое планирование йогуртового бизнеса',
+        url: '/yogurt-financial/',
+        emoji: '\u{1F4CA}',
+        gradient: 'linear-gradient(135deg, #f59e0b, #d97706)',
+        tagColor: '#d97706',
+        tags: ['Финансы', 'Бизнес']
+    },
+    {
+        id: 'nparggu',
+        title: 'НПА РГГУ',
+        desc: 'AI-экспертиза нормативно-правовых актов для студентов РГГУ',
+        url: '/nparggu',
+        emoji: '\u{2696}\u{FE0F}',
+        gradient: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
+        tagColor: '#3b82f6',
+        tags: ['Анализ', 'Право']
+    },
+    {
+        id: 'date-planner',
+        title: 'Планировщик свиданий',
+        desc: 'Генератор идей для свиданий по категории и бюджету',
+        url: '/date-planner/',
+        emoji: '\u{1F49D}',
+        gradient: 'linear-gradient(135deg, #ec4899, #f43f5e)',
+        tagColor: '#ec4899',
+        tags: ['Планирование', 'Отношения']
+    },
+    {
+        id: 'promotest',
+        title: 'Визуализатор продукта',
+        desc: 'AI-генерация фото продукта с этикеткой на любом фоне',
+        url: '/promotest/',
+        emoji: '\u{1F5BC}\u{FE0F}',
+        gradient: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
+        tagColor: '#8b5cf6',
+        tags: ['AI', 'Дизайн']
+    },
+    {
+        id: 'pdf',
+        title: 'PDF \u2192 Word',
+        desc: 'Конвертация PDF документов в редактируемый Word формат',
+        url: '/pdf/',
+        emoji: '\u{1F4D1}',
+        gradient: 'linear-gradient(135deg, #ef4444, #dc2626)',
+        tagColor: '#ef4444',
+        tags: ['Конвертер', 'Документы']
+    }
+];
 
-            <div id="secretUpload">
-                <input type="file" id="pdfInput" accept=".pdf" style="display:none">
-                <div class="upload-area" id="uploadArea" onclick="document.getElementById('pdfInput').click()">
-                    <span class="upload-icon">📄</span>
-                    <span class="upload-text" id="uploadText">Выберите PDF файл</span>
-                    <span class="upload-hint" id="fileName">Нажмите или перетащите</span>
+const VIP_KEY = 'VIP';
+const STORAGE_ORDER = 'projectOrder';
+const STORAGE_VIP = 'vipAccess';
+
+const grid = document.getElementById('projectsGrid');
+const wrapper = document.getElementById('projectsWrapper');
+
+// ── Order ────────────────────────────────────────────────
+function getSavedOrder() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_ORDER)) || []; }
+    catch { return []; }
+}
+
+function saveOrder() {
+    const ids = [...grid.querySelectorAll('.project-card')].map(c => c.dataset.id);
+    localStorage.setItem(STORAGE_ORDER, JSON.stringify(ids));
+}
+
+function getOrderedProjects() {
+    const saved = getSavedOrder();
+    if (!saved.length) return [...PROJECTS];
+    const map = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
+    const ordered = saved.filter(id => map[id]).map(id => map[id]);
+    // Append any new projects not in saved order
+    PROJECTS.forEach(p => { if (!saved.includes(p.id)) ordered.push(p); });
+    return ordered;
+}
+
+// ── Render ───────────────────────────────────────────────
+function renderCards() {
+    grid.innerHTML = '';
+    const projects = getOrderedProjects();
+    projects.forEach(p => {
+        const card = document.createElement('a');
+        card.href = p.url;
+        card.className = 'project-card';
+        card.dataset.id = p.id;
+        card.innerHTML = `
+            <div class="drag-handle" title="Перетащите для изменения порядка">&#x2630;</div>
+            <div class="card-inner">
+                <div class="card-icon" style="background:${p.gradient}">${p.emoji}</div>
+                <div class="card-title">${p.title}</div>
+                <div class="card-desc">${p.desc}</div>
+                <div class="card-tags">
+                    ${p.tags.map(t => `<span class="tag" style="background:${p.tagColor}18;color:${p.tagColor}">${t}</span>`).join('')}
                 </div>
-            </div>
+            </div>`;
+        grid.appendChild(card);
+    });
+    initDragAndDrop();
+}
 
-            <button class="secret-process-btn" id="processBtn" onclick="processPdf()" disabled>
-                Обработать
-            </button>
+// ── VIP ──────────────────────────────────────────────────
+function applyPromo() {
+    const input = document.getElementById('promoInput');
+    if (input.value.trim().toUpperCase() === VIP_KEY) {
+        localStorage.setItem(STORAGE_VIP, 'true');
+        unlockVIP();
+        input.value = '';
+    } else {
+        input.style.borderColor = '#ef4444';
+        setTimeout(() => { input.style.borderColor = ''; }, 1200);
+    }
+}
 
-            <div class="secret-status" id="secretStatus" style="display:none">
-                <div class="secret-spinner"></div>
-                <span id="statusText">Отправляю в Claude Opus...</span>
-            </div>
+function unlockVIP() {
+    wrapper.classList.remove('locked');
+    wrapper.classList.add('unlocked');
+    document.getElementById('accessBadge').style.display = 'block';
+    document.getElementById('promoInput').disabled = true;
+    document.getElementById('promoBtn').disabled = true;
+}
 
-            <div class="secret-result" id="secretResult" style="display:none">
-                <button class="secret-download-btn" id="downloadBtn">
-                    Скачать Word файл
-                </button>
-            </div>
+function checkAccess() {
+    if (localStorage.getItem(STORAGE_VIP) === 'true') unlockVIP();
+}
 
-            <div class="secret-error" id="secretError" style="display:none"></div>
-        </div>
-    </div>
+document.getElementById('promoInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') applyPromo();
+});
 
-    <!-- docx library for Word generation -->
-    <script src="https://cdn.jsdelivr.net/npm/docx@9.1.1/build/index.umd.min.js"></script>
+// ── Drag & Drop (pointer events — works on desktop + mobile) ──
+let drag = null;
 
-    <script>
-        // Valid VIP key
-        const VIP_KEY = 'VIP';
+function initDragAndDrop() {
+    grid.querySelectorAll('.drag-handle').forEach(handle => {
+        handle.addEventListener('pointerdown', onDragStart);
+    });
+}
 
-        // Get favorites from localStorage
-        function getFavorites() {
-            return JSON.parse(localStorage.getItem('favorites') || '[]');
-        }
+function onDragStart(e) {
+    const handle = e.currentTarget;
+    const card = handle.closest('.project-card');
+    if (!card) return;
 
-        // Save favorites to localStorage
-        function saveFavorites(favorites) {
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-        }
+    e.preventDefault();
+    handle.setPointerCapture(e.pointerId);
 
-        // Toggle favorite
-        function toggleFavorite(event, projectId) {
-            event.preventDefault();
-            event.stopPropagation();
+    const rect = card.getBoundingClientRect();
+    drag = {
+        card,
+        pointerId: e.pointerId,
+        offsetX: e.clientX - rect.left,
+        offsetY: e.clientY - rect.top,
+        width: rect.width,
+        height: rect.height,
+        startX: e.clientX,
+        startY: e.clientY,
+        moved: false,
+        clone: null,
+        placeholder: null
+    };
 
-            const favorites = getFavorites();
-            const index = favorites.indexOf(projectId);
+    handle.addEventListener('pointermove', onDragMove);
+    handle.addEventListener('pointerup', onDragEnd);
+    handle.addEventListener('pointercancel', onDragEnd);
+}
 
-            if (index > -1) {
-                favorites.splice(index, 1);
+function onDragMove(e) {
+    if (!drag) return;
+    const dx = e.clientX - drag.startX;
+    const dy = e.clientY - drag.startY;
+
+    if (!drag.moved && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+
+    if (!drag.moved) {
+        drag.moved = true;
+        drag.card.style.pointerEvents = 'none';
+
+        // Clone
+        drag.clone = drag.card.cloneNode(true);
+        drag.clone.className = 'project-card drag-clone';
+        drag.clone.style.width = drag.width + 'px';
+        drag.clone.style.height = drag.height + 'px';
+        document.body.appendChild(drag.clone);
+
+        // Placeholder
+        drag.placeholder = document.createElement('div');
+        drag.placeholder.className = 'drag-placeholder';
+        grid.insertBefore(drag.placeholder, drag.card);
+
+        drag.card.style.display = 'none';
+    }
+
+    drag.clone.style.left = (e.clientX - drag.offsetX) + 'px';
+    drag.clone.style.top = (e.clientY - drag.offsetY) + 'px';
+
+    // Find drop target
+    const cards = [...grid.querySelectorAll('.project-card:not([style*="display: none"])')];
+    for (const c of cards) {
+        const r = c.getBoundingClientRect();
+        if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) {
+            const afterMid = e.clientY > r.top + r.height / 2;
+            if (afterMid) {
+                grid.insertBefore(drag.placeholder, c.nextSibling);
             } else {
-                favorites.push(projectId);
+                grid.insertBefore(drag.placeholder, c);
             }
-
-            saveFavorites(favorites);
-            renderFavorites();
-            updateFavoriteButtons();
+            break;
         }
+    }
+}
 
-        // Update favorite button states
-        function updateFavoriteButtons() {
-            const favorites = getFavorites();
-            document.querySelectorAll('.favorite-btn').forEach(btn => {
-                const card = btn.closest('.project-card');
-                const projectId = card.dataset.project;
-                const isFavorite = favorites.includes(projectId);
-                btn.textContent = isFavorite ? '★' : '☆';
-                btn.classList.toggle('active', isFavorite);
-            });
-        }
+function onDragEnd(e) {
+    if (!drag) return;
+    const handle = e.currentTarget;
+    handle.removeEventListener('pointermove', onDragMove);
+    handle.removeEventListener('pointerup', onDragEnd);
+    handle.removeEventListener('pointercancel', onDragEnd);
 
-        // Render favorites section
-        function renderFavorites() {
-            const favorites = getFavorites();
-            const favoritesSection = document.getElementById('favoritesSection');
-            const favoritesGrid = document.getElementById('favoritesGrid');
+    if (drag.moved) {
+        grid.insertBefore(drag.card, drag.placeholder);
+        drag.card.style.display = '';
+        drag.card.style.pointerEvents = '';
+        drag.placeholder.remove();
+        drag.clone.remove();
+        saveOrder();
+    }
+    drag = null;
+}
 
-            if (favorites.length === 0) {
-                favoritesSection.classList.remove('has-favorites');
-                favoritesGrid.innerHTML = '';
-                return;
-            }
-
-            favoritesSection.classList.add('has-favorites');
-            favoritesGrid.innerHTML = '';
-
-            favorites.forEach(projectId => {
-                const originalCard = document.querySelector(`[data-project="${projectId}"]`);
-                if (originalCard) {
-                    const clone = originalCard.cloneNode(true);
-                    // Update the favorite button in clone
-                    const cloneBtn = clone.querySelector('.favorite-btn');
-                    if (cloneBtn) {
-                        cloneBtn.onclick = (e) => toggleFavorite(e, projectId);
-                    }
-                    favoritesGrid.appendChild(clone);
-                }
-            });
-        }
-
-        // Check if user already has VIP access
-        function checkAccess() {
-            const hasAccess = localStorage.getItem('vipAccess') === 'true';
-            if (hasAccess) {
-                unlockVIP();
-            }
-        }
-
-        // Apply VIP key
-        function applyPromo() {
-            const input = document.getElementById('promoInput');
-            const code = input.value.trim().toUpperCase();
-
-            if (code === VIP_KEY) {
-                localStorage.setItem('vipAccess', 'true');
-                unlockVIP();
-                input.value = '';
-            } else {
-                alert('Неверный VIP-ключ');
-            }
-        }
-
-        // Unlock VIP projects
-        function unlockVIP() {
-            document.getElementById('vipProjects').classList.add('unlocked');
-            document.getElementById('accessBadge').style.display = 'block';
-            document.getElementById('promoInput').disabled = true;
-            document.querySelector('.promo-button').disabled = true;
-            document.querySelector('.promo-button').style.opacity = '0.5';
-            // Re-render favorites after VIP unlock to include VIP projects
-            setTimeout(renderFavorites, 100);
-        }
-
-        // Initialize on page load
-        checkAccess();
-        updateFavoriteButtons();
-        renderFavorites();
-
-        // Allow Enter key to apply promo
-        document.getElementById('promoInput')?.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                applyPromo();
-            }
-        });
-
-        // =============================================
-        // Secret PDF → Word Feature
-        // Click header 5 times to open
-        // =============================================
-        let _sc = 0, _st = null;
-        document.querySelector('.header h1').addEventListener('click', function() {
-            _sc++;
-            clearTimeout(_st);
-            _st = setTimeout(() => { _sc = 0; }, 2500);
-            if (_sc >= 5) {
-                _sc = 0;
-                openSecretModal();
-            }
-        });
-
-        let _pdfBase64 = null;
-        let _pdfFileName = null;
-        let _docxBlob = null;
-
-        function openSecretModal() {
-            document.getElementById('secretOverlay').classList.add('active');
-            resetSecretState();
-        }
-
-        function closeSecretModal() {
-            document.getElementById('secretOverlay').classList.remove('active');
-        }
-
-        // Close on overlay click
-        document.getElementById('secretOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeSecretModal();
-        });
-
-        // Close on Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSecretModal();
-        });
-
-        function resetSecretState() {
-            _pdfBase64 = null;
-            _pdfFileName = null;
-            _docxBlob = null;
-            document.getElementById('pdfInput').value = '';
-            document.getElementById('uploadText').textContent = 'Выберите PDF файл';
-            document.getElementById('fileName').textContent = 'Нажмите или перетащите';
-            document.getElementById('uploadArea').classList.remove('has-file');
-            document.getElementById('processBtn').disabled = true;
-            document.getElementById('secretStatus').style.display = 'none';
-            document.getElementById('secretResult').style.display = 'none';
-            document.getElementById('secretError').style.display = 'none';
-        }
-
-        // File input handler
-        document.getElementById('pdfInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            handlePdfFile(file);
-        });
-
-        // Drag & drop
-        const uploadArea = document.getElementById('uploadArea');
-        uploadArea.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            this.style.borderColor = '#7c3aed';
-        });
-        uploadArea.addEventListener('dragleave', function(e) {
-            e.preventDefault();
-            this.style.borderColor = '';
-        });
-        uploadArea.addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.style.borderColor = '';
-            const file = e.dataTransfer.files[0];
-            if (file && file.type === 'application/pdf') {
-                handlePdfFile(file);
-            }
-        });
-
-        function handlePdfFile(file) {
-            _pdfFileName = file.name;
-            document.getElementById('uploadText').textContent = file.name;
-            const sizeMB = (file.size / 1024 / 1024).toFixed(1);
-            document.getElementById('fileName').textContent = sizeMB + ' МБ';
-            document.getElementById('uploadArea').classList.add('has-file');
-            document.getElementById('processBtn').disabled = false;
-            document.getElementById('secretResult').style.display = 'none';
-            document.getElementById('secretError').style.display = 'none';
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                // Extract base64 from data URL
-                _pdfBase64 = e.target.result.split(',')[1];
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function processPdf() {
-            if (!_pdfBase64) return;
-
-            const processBtn = document.getElementById('processBtn');
-            const status = document.getElementById('secretStatus');
-            const statusText = document.getElementById('statusText');
-            const result = document.getElementById('secretResult');
-            const errorDiv = document.getElementById('secretError');
-
-            processBtn.disabled = true;
-            status.style.display = 'flex';
-            result.style.display = 'none';
-            errorDiv.style.display = 'none';
-            statusText.textContent = 'Claude Opus анализирует PDF...';
-
-            try {
-                const resp = await fetch('/api/pdf-to-word', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        pdf: _pdfBase64,
-                        filename: _pdfFileName
-                    })
-                });
-
-                const data = await resp.json();
-
-                if (data.error && !data.tables) {
-                    throw new Error(data.error + (data.raw ? '\n\nОтвет AI:\n' + data.raw : ''));
-                }
-
-                if (!data.tables || data.tables.length === 0) {
-                    throw new Error('Таблицы не найдены в документе');
-                }
-
-                statusText.textContent = 'Создаю Word документ...';
-
-                // Generate .docx
-                _docxBlob = await generateDocx(data.tables);
-
-                status.style.display = 'none';
-                result.style.display = 'block';
-
-            } catch (err) {
-                status.style.display = 'none';
-                errorDiv.style.display = 'block';
-                const msg = err.message || 'Неизвестная ошибка';
-                if (msg.includes('Ответ AI:')) {
-                    const parts = msg.split('\n\nОтвет AI:\n');
-                    errorDiv.innerHTML = parts[0] + '<div class="secret-raw">' + escapeHtml(parts[1] || '') + '</div>';
-                } else {
-                    errorDiv.textContent = msg;
-                }
-                processBtn.disabled = false;
-            }
-        }
-
-        function escapeHtml(text) {
-            const d = document.createElement('div');
-            d.textContent = text;
-            return d.innerHTML;
-        }
-
-        async function generateDocx(tables) {
-            const { Document, Table, TableRow, TableCell, Paragraph, TextRun, Packer, WidthType, AlignmentType, BorderStyle } = docx;
-
-            const children = [];
-
-            tables.forEach((table, tIdx) => {
-                // Table name
-                if (table.name) {
-                    children.push(new Paragraph({
-                        children: [new TextRun({ text: table.name, bold: true, size: 24 })],
-                        spacing: { after: 150, before: tIdx > 0 ? 400 : 0 }
-                    }));
-                } else if (tIdx > 0) {
-                    children.push(new Paragraph({ text: '', spacing: { after: 300 } }));
-                }
-
-                const allRows = [];
-                const colCount = Math.max(
-                    (table.headers || []).length,
-                    ...table.rows.map(r => r.length)
-                );
-
-                const cellBorders = {
-                    top: { style: BorderStyle.SINGLE, size: 1 },
-                    bottom: { style: BorderStyle.SINGLE, size: 1 },
-                    left: { style: BorderStyle.SINGLE, size: 1 },
-                    right: { style: BorderStyle.SINGLE, size: 1 },
-                };
-
-                // Header row
-                if (table.headers && table.headers.length > 0) {
-                    const headerCells = [];
-                    for (let i = 0; i < colCount; i++) {
-                        headerCells.push(new TableCell({
-                            children: [new Paragraph({
-                                children: [new TextRun({
-                                    text: String(table.headers[i] || ''),
-                                    bold: true,
-                                    size: 20,
-                                    font: 'Calibri'
-                                })],
-                                alignment: AlignmentType.CENTER
-                            })],
-                            borders: cellBorders,
-                            shading: { fill: 'D9E2F3' }
-                        }));
-                    }
-                    allRows.push(new TableRow({ children: headerCells }));
-                }
-
-                // Data rows
-                table.rows.forEach(row => {
-                    const cells = [];
-                    for (let i = 0; i < colCount; i++) {
-                        cells.push(new TableCell({
-                            children: [new Paragraph({
-                                children: [new TextRun({
-                                    text: String(row[i] ?? ''),
-                                    size: 20,
-                                    font: 'Calibri'
-                                })]
-                            })],
-                            borders: cellBorders
-                        }));
-                    }
-                    allRows.push(new TableRow({ children: cells }));
-                });
-
-                if (allRows.length > 0) {
-                    children.push(new Table({
-                        rows: allRows,
-                        width: { size: 100, type: WidthType.PERCENTAGE }
-                    }));
-                }
-            });
-
-            const doc = new Document({
-                sections: [{
-                    properties: {},
-                    children: children
-                }]
-            });
-
-            return await Packer.toBlob(doc);
-        }
-
-        // Download button
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            if (!_docxBlob) return;
-            const name = (_pdfFileName || 'document').replace(/\.pdf$/i, '') + '.docx';
-            const url = URL.createObjectURL(_docxBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        });
-    </script>
+// ── Init ─────────────────────────────────────────────────
+checkAccess();
+renderCards();
+</script>
 </body>
 </html>
