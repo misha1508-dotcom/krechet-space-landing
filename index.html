@@ -431,47 +431,55 @@ const PROJECTS = [
 ];
 
 const VIP_KEY = 'VIP';
-const STORAGE_ORDER = 'projectOrder';
 const STORAGE_VIP = 'vipAccess';
-const STORAGE_FREE = 'freeProjects';
 
 const grid = document.getElementById('projectsGrid');
 let isVIP = false;
 
-// ── Free projects management ─────────────────────────────
-function getFreeSet() {
-    try { return new Set(JSON.parse(localStorage.getItem(STORAGE_FREE) || '[]')); }
-    catch { return new Set(); }
+// ── Server config (shared across all visitors) ───────────
+let config = { free: [], order: [] };
+
+async function loadConfig() {
+    try {
+        const res = await fetch('/api/config');
+        if (res.ok) config = await res.json();
+    } catch (e) { /* use defaults */ }
 }
 
-function saveFreeSet(s) {
-    localStorage.setItem(STORAGE_FREE, JSON.stringify([...s]));
-}
-
-function toggleAccess(projectId) {
-    const free = getFreeSet();
-    if (free.has(projectId)) {
-        free.delete(projectId);
-    } else {
-        free.add(projectId);
+async function saveConfig(updates) {
+    try {
+        await fetch('/api/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: VIP_KEY, ...updates })
+        });
+    } catch (e) {
+        console.error('Config save failed:', e);
     }
-    saveFreeSet(free);
+}
+
+// ── Access toggle ────────────────────────────────────────
+async function toggleAccess(projectId) {
+    const freeSet = new Set(config.free || []);
+    if (freeSet.has(projectId)) {
+        freeSet.delete(projectId);
+    } else {
+        freeSet.add(projectId);
+    }
+    config.free = [...freeSet];
     renderCards();
+    await saveConfig({ free: config.free });
 }
 
 // ── Order ────────────────────────────────────────────────
-function getSavedOrder() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_ORDER)) || []; }
-    catch { return []; }
-}
-
 function saveOrder() {
     const ids = [...grid.querySelectorAll('.project-card')].map(c => c.dataset.id);
-    localStorage.setItem(STORAGE_ORDER, JSON.stringify(ids));
+    config.order = ids;
+    saveConfig({ order: ids });
 }
 
 function getOrderedProjects() {
-    const saved = getSavedOrder();
+    const saved = config.order || [];
     if (!saved.length) return [...PROJECTS];
     const map = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
     const ordered = saved.filter(id => map[id]).map(id => map[id]);
@@ -483,7 +491,7 @@ function getOrderedProjects() {
 function renderCards() {
     grid.innerHTML = '';
     const projects = getOrderedProjects();
-    const freeSet = getFreeSet();
+    const freeSet = new Set(config.free || []);
 
     projects.forEach(p => {
         const isFree = freeSet.has(p.id);
@@ -677,7 +685,11 @@ function onDragEnd(e) {
 }
 
 // ── Init ─────────────────────────────────────────────────
-checkAccess();
+async function init() {
+    await loadConfig();
+    checkAccess();
+}
+init();
 </script>
 </body>
 </html>
